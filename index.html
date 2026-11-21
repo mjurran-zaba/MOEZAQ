@@ -1237,13 +1237,13 @@
     }
 
     /*
-      BAGIAN TENGAH NOTEZ
+      BAGIAN TENGAH NOTEZ: TRACK 6 FITUR (SLIDE TO LEFT SMOOTHLY)
     */
     .notez-carousel-wrap {
       width: 100%;
       position: relative;
       opacity: 0;
-      transform: translateX(-48px);
+      transform: translateX(52px);
       transition:
         opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1),
         transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1256,7 +1256,7 @@
 
     .notez-carousel-wrap.exiting {
       opacity: 0 !important;
-      transform: translateX(-48px) !important;
+      transform: translateX(52px) !important;
       transition:
         opacity 0.82s cubic-bezier(0.16, 1, 0.3, 1),
         transform 0.82s cubic-bezier(0.16, 1, 0.3, 1) !important;
@@ -2963,7 +2963,7 @@
           setTimeout(() => {
             notezDividerTop.classList.add("revealed");
 
-            // 3. BAGIAN TENGAH: Track 6 Fitur meluncur masuk (SLIDE TO RIGHT)
+            // 3. BAGIAN TENGAH: Track 6 Fitur meluncur masuk (SLIDE TO LEFT SMOOTHLY)
             setTimeout(() => {
               notezCarouselWrap.classList.add("revealed");
 
@@ -3005,7 +3005,7 @@
         notezDividerCenter.classList.add("exiting");
       }, 140);
 
-      // 3. Track 6 Fitur meluncur keluar ke kiri secara tenang dan lambat
+      // 3. Track 6 Fitur meluncur keluar ke kanan secara tenang dan lambat
       setTimeout(() => {
         notezCarouselWrap.classList.add("exiting");
       }, 260);
