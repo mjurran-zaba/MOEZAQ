@@ -1632,6 +1632,223 @@
 
     /*
       ======================================================
+      ZONA 3: PANGGUNG ABOUT ME (ABOUT ME STAGE ZONE)
+      ======================================================
+    */
+    .about-stage-zone {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      position: relative;
+    }
+
+    .about-stage-zone.is-active {
+      display: flex;
+    }
+
+    .about-hero-row {
+      display: flex;
+      align-items: stretch;
+      gap: 12px;
+      width: 100%;
+      position: relative;
+    }
+
+    /* KARTU FOTO (TOP-LEFT): FADED ZOOM OUT (FADED WHITE MILK 45%) */
+    .about-photo-card {
+      flex: 0 0 114px;
+      width: 114px;
+      height: 114px;
+      border-radius: 18px;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      user-select: none;
+      -webkit-user-select: none;
+
+      /* Faded White Milk Glassmorphism 45% */
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%),
+        rgba(16, 22, 32, 0.45);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+
+      box-shadow:
+        0 14px 30px -8px rgba(0, 0, 0, 0.72),
+        inset 1.5px 1.5px 2.5px rgba(255, 255, 255, 0.32),
+        inset -2px -2px 5px rgba(0, 0, 0, 0.38);
+
+      /* Spawn Logic: Faded Zoom Out */
+      opacity: 0;
+      transform: scale(1.18);
+      transition:
+        opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .about-photo-card.revealed {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .about-photo-card.exiting {
+      opacity: 0 !important;
+      transform: scale(1.18) !important;
+      transition:
+        opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      pointer-events: none;
+    }
+
+    .about-photo-frame {
+      width: 100%;
+      height: 100%;
+      border-radius: 13px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px dashed rgba(255, 255, 255, 0.24);
+      position: relative;
+    }
+
+    .about-photo-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      color: rgba(255, 255, 255, 0.70);
+    }
+
+    .about-photo-placeholder svg {
+      width: 32px;
+      height: 32px;
+      stroke: currentColor;
+      opacity: 0.85;
+    }
+
+    .photo-placeholder-caption {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      font-weight: 800;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--c-text-muted);
+    }
+
+    .about-photo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 13px;
+    }
+
+    /* HERO CARD: SLIDE TO LEFT MENDEKATI FOTO (FADED WHITE MILK GLASSMORPHISM 45%) */
+    .about-hero-card {
+      flex: 1;
+      min-width: 0;
+      min-height: 114px;
+      border-radius: 18px;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      user-select: none;
+      -webkit-user-select: none;
+
+      /* Faded White Milk Glassmorphism 45% */
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%),
+        rgba(16, 22, 32, 0.45);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+
+      box-shadow:
+        0 14px 30px -8px rgba(0, 0, 0, 0.72),
+        inset 1.5px 1.5px 2.5px rgba(255, 255, 255, 0.32),
+        inset -2px -2px 5px rgba(0, 0, 0, 0.38);
+
+      /* Spawn Logic: Slide to Left */
+      opacity: 0;
+      transform: translateX(48px);
+      transition:
+        opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .about-hero-card.revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .about-hero-card.exiting {
+      opacity: 0 !important;
+      transform: translateX(48px) !important;
+      transition:
+        opacity 0.58s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.58s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      pointer-events: none;
+    }
+
+    .about-hero-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--c-accent-emerald);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.9);
+      flex-shrink: 0;
+    }
+
+    .about-hero-title {
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.85);
+    }
+
+    .about-hero-tagline {
+      font-size: 0.78rem;
+      font-style: italic;
+      color: var(--c-text-secondary);
+      line-height: 1.35;
+      margin: 4px 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    .about-hero-meta {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--c-text-muted);
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #about-divider-top {
+      margin-top: 22px;
+      margin-bottom: 22px;
+    }
+
+    /*
+      ======================================================
       THEME GALLERY OVERLAY: FADED WHITE MILK GLASSMORPHISM 45%
       ======================================================
     */
@@ -2030,6 +2247,32 @@
       .theme-label-name {
         font-size: 0.76rem;
       }
+
+      .about-photo-card {
+        flex: 0 0 96px;
+        width: 96px;
+        height: 96px;
+        border-radius: 16px;
+        padding: 5px;
+      }
+      .about-photo-frame {
+        border-radius: 12px;
+      }
+      .about-hero-card {
+        min-height: 96px;
+        padding: 10px 13px;
+        border-radius: 16px;
+      }
+      .about-hero-title {
+        font-size: 0.80rem;
+      }
+      .about-hero-tagline {
+        font-size: 0.72rem;
+        line-height: 1.28;
+      }
+      .about-hero-meta {
+        font-size: 0.58rem;
+      }
     }
   </style>
 </head>
@@ -2154,16 +2397,15 @@
 
       <main id="main-deck">
 
-        <!-- Card 1: ABOUT ME (Top edge badge soon) -->
+        <!-- Card 1: ABOUT ME -->
         <div
           class="deck-card"
           id="card-about"
-          onclick="triggerSoonBadge(event)"
+          onclick="handleAboutClick(event)"
           tabindex="0"
           role="button"
-          aria-label="Tentang Saya"
+          aria-label="Buka Profil ABOUT ME"
         >
-          <span class="badge-edge-soon" id="edge-soon">soon</span>
           <div class="item-header-row">
             <div class="item-title-group">
               <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -2540,6 +2782,55 @@
 
     </div>
 
+    <!--
+      ======================================================
+      ZONA 3: PANGGUNG ABOUT ME (ABOUT ME STAGE ZONE)
+      ======================================================
+    -->
+    <div class="about-stage-zone" id="about-stage-zone">
+
+      <!-- BAGIAN ATAS: ROW FOTO (KIRI) + HERO CARD (KANAN) -->
+      <div class="about-hero-row" id="about-hero-row">
+
+        <!-- 1. KARTU FOTO (TOP-LEFT): FADED ZOOM OUT (FADED WHITE MILK 45%) -->
+        <div class="about-photo-card" id="about-photo-card" role="img" aria-label="Foto Profil Muhammad Zaqi Prasetyo">
+          <div class="about-photo-frame">
+            <div class="about-photo-placeholder" id="about-photo-placeholder">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span class="photo-placeholder-caption">PHOTO SPOT</span>
+            </div>
+            <!-- Tag gambar siap pakai saat file foto dikirim -->
+            <img src="" alt="Muhammad Zaqi Prasetyo" id="about-photo-img" class="about-photo-img" style="display:none;">
+          </div>
+        </div>
+
+        <!-- 2. HERO CARD (SLIDE TO LEFT MENDEKATI KARTU FOTO) -->
+        <div class="about-hero-card" id="about-hero-card">
+          <div class="item-header-row">
+            <div class="item-title-group">
+              <span class="about-hero-dot"></span>
+              <h2 class="about-hero-title">MUHAMMAD ZAQI PRASETYO</h2>
+            </div>
+            <span class="item-badge-pill">Creator</span>
+          </div>
+          <p class="about-hero-tagline">
+            "I'm not who you think or imagine. Don't expect too much."
+          </p>
+          <div class="about-hero-meta">
+            INDONESIA &bull; FOR NOTHING
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 3. GARIS HORIZONTAL PEMBATAS BAWAH -->
+      <hr class="divider-sep" id="about-divider-top">
+
+    </div>
+
   </div>
 
   <!--
@@ -2800,6 +3091,14 @@
     const notezBottomZone = document.getElementById("notez-bottom-zone");
     const carouselDots = document.querySelectorAll(".carousel-dot");
 
+    // Elemen Panggung ABOUT ME
+    const aboutStageZone = document.getElementById("about-stage-zone");
+    const aboutPhotoCard = document.getElementById("about-photo-card");
+    const aboutHeroCard = document.getElementById("about-hero-card");
+    const aboutDividerTop = document.getElementById("about-divider-top");
+
+    let activeStage = "cover"; // "cover" | "notez" | "about"
+
     // Elemen Leader Stage & Theme Gallery
     const cardLeaderVibes = document.getElementById("card-leader-vibes");
     const leaderCardContent = document.getElementById("leader-card-content");
@@ -2897,6 +3196,7 @@
     function handleNotezClick(e) {
       if (isTransitioning) return;
       isTransitioning = true;
+      activeStage = "notez";
 
       if (navigator.vibrate) navigator.vibrate(14);
 
@@ -2988,6 +3288,86 @@
       }, 1380 + 580 + 500);
     }
 
+    // KOREOGRAFI PULANG SAMPUL & MEMBUKA PANGGUNG ABOUT ME
+    function handleAboutClick(e) {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      activeStage = "about";
+
+      if (navigator.vibrate) navigator.vibrate(14);
+
+      // LIFO Exit elemen Cover (sama persis dengan handleNotezClick)
+      footerBadgesWrap.classList.add("exiting");
+
+      setTimeout(() => {
+        footerNoteCard.classList.add("exiting");
+      }, 200);
+
+      setTimeout(() => {
+        dividerBottomEl.classList.add("exiting");
+      }, 420);
+
+      setTimeout(() => {
+        cardNotez.classList.add("exiting");
+        cardZcode.classList.add("exiting");
+      }, 660);
+
+      setTimeout(() => {
+        cardAbout.classList.add("exiting");
+      }, 920);
+
+      setTimeout(() => {
+        dividerTopEl.classList.add("exiting");
+      }, 1160);
+
+      setTimeout(() => {
+        headerEl.classList.add("exiting");
+      }, 1380);
+
+      // Jeda 0.5s setelah Header Card tuntas pulang
+      setTimeout(() => {
+        coverZone.classList.add("is-hidden");
+        const allRevealed = [
+          headerEl,
+          dividerTopEl,
+          cardAbout,
+          cardNotez,
+          cardZcode,
+          dividerBottomEl,
+          footerNoteCard,
+          footerBadgesWrap
+        ];
+        allRevealed.forEach(el => el.classList.remove("revealed"));
+        headerEl.classList.remove("hdr-anim-active");
+
+        btnBackEl.classList.add("revealed");
+
+        aboutStageZone.classList.add("is-active");
+        aboutPhotoCard.classList.remove("exiting");
+        aboutHeroCard.classList.remove("exiting");
+        aboutDividerTop.classList.remove("exiting");
+
+        // 1. KARTU FOTO (TOP-LEFT): MUNCUL DENGAN FADED ZOOM OUT
+        setTimeout(() => {
+          aboutPhotoCard.classList.add("revealed");
+
+          // 2. JEDA 0.7S: HERO CARD MELUNCUR MASUK (SLIDE TO LEFT MENDEKATI KARTU FOTO)
+          setTimeout(() => {
+            aboutHeroCard.classList.add("revealed");
+
+            // 3. GARIS HORIZONTAL PEMBATAS MEKAR DI BAWAHNYA
+            setTimeout(() => {
+              aboutDividerTop.classList.add("revealed");
+              isTransitioning = false;
+            }, 300);
+
+          }, 700);
+
+        }, 120);
+
+      }, 1380 + 580 + 500);
+    }
+
     // SAAT TOMBOL BACK DI-TAP: KEMBALI KE SAMPUL UTAMA (PELAN & ANGGUN)
     function handleBackToCover(e) {
       if (isTransitioning) return;
@@ -2997,40 +3377,68 @@
 
       btnBackEl.classList.remove("revealed");
 
-      // 1. Bagian Bawah NOTEZ meluncur turun keluar
-      notezBottomZone.classList.add("exiting");
+      if (activeStage === "about") {
+        // 1. Garis pembatas bawah menguncup
+        aboutDividerTop.classList.add("exiting");
 
-      // 2. Garis pembatas tengah menguncup
-      setTimeout(() => {
-        notezDividerCenter.classList.add("exiting");
-      }, 140);
+        // 2. Hero Card meluncur keluar ke kanan
+        setTimeout(() => {
+          aboutHeroCard.classList.add("exiting");
+        }, 140);
 
-      // 3. Track 6 Fitur meluncur keluar ke kanan secara tenang dan lambat
-      setTimeout(() => {
-        notezCarouselWrap.classList.add("exiting");
-      }, 260);
+        // 3. Kartu Foto zoom out / fade out keluar
+        setTimeout(() => {
+          aboutPhotoCard.classList.add("exiting");
+        }, 280);
 
-      // 4. Garis pembatas atas menguncup
-      setTimeout(() => {
-        notezDividerTop.classList.add("exiting");
-      }, 440);
+        // 4. Setelah tuntas pulang, kembali ke sampul utama (FIFO)
+        setTimeout(() => {
+          aboutPhotoCard.classList.remove("revealed");
+          aboutHeroCard.classList.remove("revealed");
+          aboutDividerTop.classList.remove("revealed");
+          aboutStageZone.classList.remove("is-active");
+          activeStage = "cover";
 
-      // 5. Card Atas NOTEZ meluncur naik pulang ke atas
-      setTimeout(() => {
-        notezHeaderCard.classList.add("exiting");
-      }, 560);
+          runSpawnSequence();
+        }, 280 + 550 + 180);
 
-      // 6. Setelah semua elemen NOTEZ tuntas pulang, panggil kembali sampul utama
-      setTimeout(() => {
-        notezHeaderCard.classList.remove("revealed");
-        notezDividerTop.classList.remove("revealed");
-        notezCarouselWrap.classList.remove("revealed");
-        notezDividerCenter.classList.remove("revealed");
-        notezBottomZone.classList.remove("revealed");
-        notezStageZone.classList.remove("is-active");
+      } else {
+        // 1. Bagian Bawah NOTEZ meluncur turun keluar
+        notezBottomZone.classList.add("exiting");
 
-        runSpawnSequence();
-      }, 560 + 620 + 200);
+        // 2. Garis pembatas tengah menguncup
+        setTimeout(() => {
+          notezDividerCenter.classList.add("exiting");
+        }, 140);
+
+        // 3. Track 6 Fitur meluncur keluar ke kanan secara tenang dan lambat
+        setTimeout(() => {
+          notezCarouselWrap.classList.add("exiting");
+        }, 260);
+
+        // 4. Garis pembatas atas menguncup
+        setTimeout(() => {
+          notezDividerTop.classList.add("exiting");
+        }, 440);
+
+        // 5. Card Atas NOTEZ meluncur naik pulang ke atas
+        setTimeout(() => {
+          notezHeaderCard.classList.add("exiting");
+        }, 560);
+
+        // 6. Setelah semua elemen NOTEZ tuntas pulang, panggil kembali sampul utama
+        setTimeout(() => {
+          notezHeaderCard.classList.remove("revealed");
+          notezDividerTop.classList.remove("revealed");
+          notezCarouselWrap.classList.remove("revealed");
+          notezDividerCenter.classList.remove("revealed");
+          notezBottomZone.classList.remove("revealed");
+          notezStageZone.classList.remove("is-active");
+          activeStage = "cover";
+
+          runSpawnSequence();
+        }, 560 + 620 + 200);
+      }
     }
 
     // LEADER STAGE: SAAT CARD "Pick your vibes" DI-TAP
@@ -3131,17 +3539,6 @@
         card.addEventListener("touchend", pressOff, { passive: true });
         card.addEventListener("touchcancel", pressOff, { passive: true });
       });
-    }
-
-    let soonTimerAbout = null;
-    function triggerSoonBadge(event) {
-      const badge = document.getElementById("edge-soon");
-      badge.classList.add("active");
-
-      if (soonTimerAbout) clearTimeout(soonTimerAbout);
-      soonTimerAbout = setTimeout(() => {
-        badge.classList.remove("active");
-      }, 2400);
     }
 
     let soonTimerZcode = null;
