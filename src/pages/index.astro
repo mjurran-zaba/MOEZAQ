@@ -272,9 +272,9 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     }
 
     /*
-      HARMONIOUS UNIFIED TRANSITIONS (ANTI-SALING MENDAHULUI)
-      Semua elemen keluar dengan arah dan durasi yang terpadu lembut,
-      mencegah tabrakan visual dari arah berlawanan.
+      HARMONIOUS UNIFIED TRANSITIONS (LUXURIOUS NATURAL GLIDE)
+      Semua elemen keluar dengan arah dan durasi terpadu (360ms natural glide)
+      sehingga mata dapat mengikuti alur gerak lembut tanpa kesan teleportasi.
     */
     .header-card.exiting,
     .divider-sep.exiting,
@@ -292,10 +292,10 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     .notez-carousel-wrap.exiting,
     .notez-bottom-zone.exiting {
       opacity: 0 !important;
-      transform: translate3d(0, 14px, 0) !important;
+      transform: translate3d(0, 18px, 0) !important;
       transition:
-        opacity 0.22s cubic-bezier(0.2, 0.9, 0.3, 1),
-        transform 0.22s cubic-bezier(0.2, 0.9, 0.3, 1) !important;
+        opacity 0.36s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.36s cubic-bezier(0.22, 1, 0.36, 1) !important;
       pointer-events: none !important;
     }
 
@@ -642,14 +642,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       transform: translateY(0);
     }
 
-    .header-card.exiting {
-      opacity: 0 !important;
-      transform: translateY(-22px) !important;
-      transition:
-        opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      pointer-events: none;
-    }
+
 
     .hdr-line-1,
     .hdr-line-2 {
@@ -758,13 +751,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       transform: scaleX(1);
     }
 
-    .divider-sep.exiting {
-      opacity: 0 !important;
-      transform: scaleX(0) !important;
-      transition:
-        opacity 0.58s ease,
-        transform 0.58s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
+
 
     main {
       margin-top: 0;
@@ -886,14 +873,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       transform: translate3d(0, 0, 0);
     }
 
-    #card-about.exiting {
-      opacity: 0 !important;
-      transform: translate3d(-56px, 0, 0) !important;
-      transition:
-        opacity 0.58s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.58s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      pointer-events: none;
-    }
+
 
     .grid-duo {
       display: grid !important;
@@ -926,14 +906,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       pointer-events: auto;
     }
 
-    .card-slide-left.exiting {
-      opacity: 0 !important;
-      transform: translateX(58px) !important;
-      transition:
-        opacity 0.58s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.58s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      pointer-events: none;
-    }
+
 
     .item-header-row {
       display: flex;
@@ -1073,14 +1046,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       transform: translateY(0);
     }
 
-    .footer-note-card.exiting {
-      opacity: 0 !important;
-      transform: translateY(22px) !important;
-      transition:
-        opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      pointer-events: none;
-    }
+
 
     .footer-note-text {
       font-size: 0.85rem;
@@ -1111,14 +1077,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       transform: translateY(0);
     }
 
-    .footer-badges-wrap.exiting {
-      opacity: 0 !important;
-      transform: translateY(22px) !important;
-      transition:
-        opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      pointer-events: none;
-    }
+
 
     .gh-glass-badge {
       display: inline-flex;
@@ -1255,14 +1214,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       transform: translateY(0);
     }
 
-    .notez-header-card.exiting {
-      opacity: 0 !important;
-      transform: translateY(-28px) !important;
-      transition:
-        opacity 0.62s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.62s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      pointer-events: none;
-    }
+
 
     .notez-hdr-badge {
       display: inline-flex;
@@ -1327,14 +1279,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       transform: translateX(0);
     }
 
-    .notez-carousel-wrap.exiting {
-      opacity: 0 !important;
-      transform: translateX(52px) !important;
-      transition:
-        opacity 0.82s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.82s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      pointer-events: none;
-    }
+
 
     .notez-cards-track {
       display: flex;
@@ -1508,14 +1453,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       transform: translateY(0);
     }
 
-    .notez-bottom-zone.exiting {
-      opacity: 0 !important;
-      transform: translateY(22px) !important;
-      transition:
-        opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      pointer-events: none;
-    }
+
 
     /* HERO ACTION CARD: DIRECT DOWNLOAD APK (FADED WHITE MILK GLASSMORPHISM 45%) */
     .notez-download-card {
@@ -1767,14 +1705,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       transform: scale(1);
     }
 
-    .about-photo-card.exiting {
-      opacity: 0 !important;
-      transform: scale(1.18) !important;
-      transition:
-        opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      pointer-events: none;
-    }
+
 
     .about-photo-frame {
       width: 100%;
@@ -1841,14 +1772,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       transform: translate3d(0, 0, 0);
     }
 
-    .about-hero-card.exiting {
-      opacity: 0 !important;
-      transform: translate3d(48px, 0, 0) !important;
-      transition:
-        opacity 0.58s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.58s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      pointer-events: none;
-    }
+
 
     .about-hero-content {
       display: flex;
@@ -1940,13 +1864,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       transform: translate3d(0, 0, 0);
     }
 
-    .about-quick-card.exiting {
-      opacity: 0 !important;
-      transform: translate3d(-48px, 0, 0) !important;
-      transition:
-        opacity 0.42s ease,
-        transform 0.42s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    }
+
 
     .about-quick-card:hover {
       background:
@@ -2060,6 +1978,19 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       line-height: 1.35;
       flex-shrink: 0;
       text-align: right;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .pipe-code {
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.28);
+      color: var(--c-accent-amber);
+      letter-spacing: 0.02em;
     }
 
     .quick-edu-item {
@@ -2157,14 +2088,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       transform: translate3d(0, 0, 0);
     }
 
-    .about-story-card.exiting {
-      opacity: 0 !important;
-      transform: translate3d(48px, 0, 0) !important;
-      transition:
-        opacity 0.58s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.58s cubic-bezier(0.16, 1, 0.3, 1) !important;
-      pointer-events: none;
-    }
+
 
     .about-story-header {
       display: flex;
@@ -2745,6 +2669,10 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       }
       .pipe-right {
         font-size: 0.62rem;
+      }
+      .pipe-code {
+        font-size: 0.58rem;
+        padding: 1px 4px;
       }
       .edu-school {
         font-size: 0.66rem;
@@ -3528,6 +3456,30 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
             </div>
           </div>
 
+          <!-- 6. Project -->
+          <div class="about-quick-card" id="quick-card-project" role="button" tabindex="0" aria-expanded="false" aria-label="Project Details">
+            <div class="quick-card-header">
+              <span class="quick-card-title">Project</span>
+              <svg class="quick-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <div class="quick-card-body">
+              <div class="quick-card-body-inner">
+                <div class="quick-pipe-item">
+                  <span class="pipe-left">NOTEZ</span>
+                  <span class="pipe-sep">|</span>
+                  <span class="pipe-right"><code class="pipe-code">release version</code></span>
+                </div>
+                <div class="quick-pipe-item">
+                  <span class="pipe-left">ZCODE</span>
+                  <span class="pipe-sep">|</span>
+                  <span class="pipe-right"><code class="pipe-code">release version</code></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
 
         <!-- KANAN: CARD BIOGRAFI RPG (LEBAR SETENGAH LAYAR) -->
@@ -3892,7 +3844,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       runSpawnSequence();
     }
 
-    // FUNGSI MUNCUL SAMPUL UTAMA (SPAWN SEQUENCE) - HARMONIS, SINKRON & LEMBUT
+    // FUNGSI MUNCUL SAMPUL UTAMA (SPAWN SEQUENCE) - ELEGAN, ALAMI & SINKRON
     function runSpawnSequence() {
       coverZone.classList.remove("is-hidden");
 
@@ -3908,13 +3860,13 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       ];
       exitingEls.forEach(el => el.classList.remove("exiting"));
 
-      // Wave 1: Header & Pembatas Atas (bersamaan)
+      // Wave 1: Header & Pembatas Atas (bersamaan dengan glide lembut)
       addStageTimer(() => {
         headerEl.classList.add("revealed");
         headerEl.classList.add("hdr-anim-active");
         dividerTopEl.classList.add("revealed");
 
-        // Wave 2: Main Cards (ABOUT, NOTEZ, ZCODE bersamaan dalam harmoni)
+        // Wave 2: Main Cards (ABOUT, NOTEZ, ZCODE meluncur teratur)
         addStageTimer(() => {
           cardAbout.classList.add("revealed");
           cardNotez.classList.add("revealed");
@@ -3926,11 +3878,11 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
             footerNoteCard.classList.add("revealed");
             footerBadgesWrap.classList.add("revealed");
             isTransitioning = false;
-          }, 80);
+          }, 120);
 
-        }, 70);
+        }, 120);
 
-      }, 30);
+      }, 60);
     }
 
     function setupQuickCardsAccordion() {
@@ -3999,23 +3951,17 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
       if (navigator.vibrate) navigator.vibrate(14);
 
-      // Keluar Cover secara terpadu tanpa saling mendahului
+      // Keluar Cover secara terpadu (seluruh elemen glide turun seragam 360ms)
       footerBadgesWrap.classList.add("exiting");
       footerNoteCard.classList.add("exiting");
       dividerBottomEl.classList.add("exiting");
+      cardNotez.classList.add("exiting");
+      cardZcode.classList.add("exiting");
+      cardAbout.classList.add("exiting");
+      dividerTopEl.classList.add("exiting");
+      headerEl.classList.add("exiting");
 
-      addStageTimer(() => {
-        cardNotez.classList.add("exiting");
-        cardZcode.classList.add("exiting");
-        cardAbout.classList.add("exiting");
-
-        addStageTimer(() => {
-          dividerTopEl.classList.add("exiting");
-          headerEl.classList.add("exiting");
-        }, 40);
-      }, 40);
-
-      // Setelah Cover tuntas keluar lembut (240ms), buka Panggung NOTEZ
+      // Setelah Cover tuntas selesai glide (380ms), buka Panggung NOTEZ
       addStageTimer(() => {
         coverZone.classList.add("is-hidden");
         const allRevealed = [
@@ -4044,7 +3990,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         if (notezCardsTrack) notezCardsTrack.scrollLeft = 0;
         updateActiveDot(0);
 
-        // Masuk Panggung NOTEZ secara terpadu & mengalir
+        // Masuk Panggung NOTEZ secara terpadu & bernapas (tidak terburu-buru / teleport)
         // Wave 1: Card Header NOTEZ & Divider Top
         addStageTimer(() => {
           notezHeaderCard.classList.add("revealed");
@@ -4058,13 +4004,13 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
             // Wave 3: Bottom Action Zone
             addStageTimer(() => {
               notezBottomZone.classList.add("revealed");
-            }, 70);
+            }, 120);
 
-          }, 70);
+          }, 120);
 
-        }, 30);
+        }, 50);
 
-      }, 240);
+      }, 380);
     }
 
     // KOREOGRAFI PULANG SAMPUL & MEMBUKA PANGGUNG ABOUT ME (SINKRON & HARMONIS)
@@ -4075,23 +4021,17 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
       if (navigator.vibrate) navigator.vibrate(14);
 
-      // Keluar Cover secara terpadu tanpa saling mendahului
+      // Keluar Cover secara terpadu (seluruh elemen glide turun seragam 360ms)
       footerBadgesWrap.classList.add("exiting");
       footerNoteCard.classList.add("exiting");
       dividerBottomEl.classList.add("exiting");
+      cardNotez.classList.add("exiting");
+      cardZcode.classList.add("exiting");
+      cardAbout.classList.add("exiting");
+      dividerTopEl.classList.add("exiting");
+      headerEl.classList.add("exiting");
 
-      addStageTimer(() => {
-        cardNotez.classList.add("exiting");
-        cardZcode.classList.add("exiting");
-        cardAbout.classList.add("exiting");
-
-        addStageTimer(() => {
-          dividerTopEl.classList.add("exiting");
-          headerEl.classList.add("exiting");
-        }, 40);
-      }, 40);
-
-      // Setelah Cover tuntas keluar lembut (240ms), buka Panggung ABOUT ME
+      // Setelah Cover tuntas selesai glide (380ms), buka Panggung ABOUT ME
       addStageTimer(() => {
         coverZone.classList.add("is-hidden");
         const allRevealed = [
@@ -4121,30 +4061,31 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
           c.classList.remove("revealed");
         });
 
-        // Masuk Panggung ABOUT ME secara terpadu:
+        // Masuk Panggung ABOUT ME secara terpadu & bernapas (tidak teleport)
         // Wave 1: Kartu Foto + Hero Card + Divider Top bersamaan
         addStageTimer(() => {
           aboutPhotoCard.classList.add("revealed");
           aboutHeroCard.classList.add("revealed");
           aboutDividerTop.classList.add("revealed");
 
-          // Wave 2: Story Card & Quick Cards beruntun lembut
+          // Wave 2: Story Card meluncur masuk
           addStageTimer(() => {
             aboutStoryCard.classList.add("revealed");
 
+            // Wave 3: Quick Cards meluncur berurutan halus (6 cards)
             addStageTimer(() => {
               quickCards.forEach((card, idx) => {
                 addStageTimer(() => {
                   card.classList.add("revealed");
-                }, idx * 40);
+                }, idx * 45);
               });
-            }, 50);
+            }, 80);
 
-          }, 70);
+          }, 110);
 
-        }, 30);
+        }, 50);
 
-      }, 240);
+      }, 380);
     }
 
     // SAAT TOMBOL BACK DI-TAP: KEMBALI KE SAMPUL UTAMA (INSTAN, TERPADU & SILKY SMOOTH)
@@ -4165,7 +4106,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       btnBackEl.classList.remove("revealed");
 
       if (activeStage === "about") {
-        // Semua elemen panggung About keluar bersamaan secara terpadu (anti-saling mendahului)
+        // Semua elemen panggung About keluar bersamaan secara terpadu (360ms glide lembut)
         const quickCards = document.querySelectorAll(".about-quick-card");
         quickCards.forEach(c => c.classList.add("exiting"));
         aboutStoryCard.classList.add("exiting");
@@ -4173,7 +4114,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         aboutHeroCard.classList.add("exiting");
         aboutPhotoCard.classList.add("exiting");
 
-        // Setelah stage tuntas keluar lembut (220ms), bersihkan & buka kembali cover
+        // Setelah stage tuntas selesai glide (380ms), bersihkan & buka kembali cover
         setTimeout(() => {
           aboutPhotoCard.classList.remove("revealed", "exiting");
           aboutHeroCard.classList.remove("revealed", "exiting");
@@ -4187,17 +4128,17 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
           activeStage = "cover";
 
           runSpawnSequence();
-        }, 220);
+        }, 380);
 
       } else {
-        // Semua elemen panggung NOTEZ keluar bersamaan secara terpadu
+        // Semua elemen panggung NOTEZ keluar bersamaan secara terpadu (360ms glide lembut)
         notezBottomZone.classList.add("exiting");
         notezDividerCenter.classList.add("exiting");
         notezCarouselWrap.classList.add("exiting");
         notezDividerTop.classList.add("exiting");
         notezHeaderCard.classList.add("exiting");
 
-        // Setelah stage tuntas keluar lembut (220ms), bersihkan & buka kembali cover
+        // Setelah stage tuntas selesai glide (380ms), bersihkan & buka kembali cover
         setTimeout(() => {
           notezHeaderCard.classList.remove("revealed", "exiting");
           notezDividerTop.classList.remove("revealed", "exiting");
@@ -4208,7 +4149,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
           activeStage = "cover";
 
           runSpawnSequence();
-        }, 220);
+        }, 380);
       }
     }
 
