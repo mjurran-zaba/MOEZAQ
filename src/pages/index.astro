@@ -1923,24 +1923,49 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       color: var(--c-accent-amber);
     }
 
-    /* Drawer Expand to Down */
+    /* Kunci tinggi 1 baris saat tertutup (Mencegah isi nongol di bawah kartu) */
+    .about-quick-card:not(.is-expanded) {
+      height: 36px;
+      max-height: 36px;
+    }
+
+    .about-quick-card.is-expanded {
+      height: auto;
+      max-height: none;
+    }
+
+    /* Drawer Expand to Down: Tersembunyi 100% saat tertutup */
     .quick-card-body {
       display: grid;
       grid-template-rows: 0fr;
-      transition: grid-template-rows 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+      visibility: hidden;
+      opacity: 0;
+      transition:
+        grid-template-rows 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.22s ease,
+        visibility 0.32s ease;
     }
 
     .about-quick-card.is-expanded .quick-card-body {
       grid-template-rows: 1fr;
+      visibility: visible;
+      opacity: 1;
     }
 
     .quick-card-body-inner {
+      min-height: 0;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       gap: 6px;
-      padding: 4px 14px 12px 14px;
+      padding: 6px 14px 12px 14px;
       border-top: 1px dashed rgba(255, 255, 255, 0.14);
+    }
+
+    .about-quick-card:not(.is-expanded) .quick-card-body-inner {
+      padding: 0;
+      border-top: none;
     }
 
     /* Format Item Dalam Card */
@@ -2645,6 +2670,10 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       .about-quick-card {
         border-radius: 10px;
       }
+      .about-quick-card:not(.is-expanded) {
+        height: 32px;
+        max-height: 32px;
+      }
       .quick-card-header {
         height: 32px;
         min-height: 32px;
@@ -2658,8 +2687,12 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         height: 11px;
       }
       .quick-card-body-inner {
-        padding: 3px 10px 10px 10px;
+        padding: 4px 10px 10px 10px;
         gap: 5px;
+      }
+      .about-quick-card:not(.is-expanded) .quick-card-body-inner {
+        padding: 0;
+        border-top: none;
       }
       .pipe-left {
         font-size: 0.66rem;
