@@ -2058,7 +2058,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     /* Format Item Dalam Card */
     .quick-pipe-item {
       display: flex;
-      align-items: baseline;
+      align-items: flex-start;
       justify-content: space-between;
       gap: 6px;
       padding: 3px 0;
@@ -2075,12 +2075,15 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       color: #f1f5f9;
       line-height: 1.35;
       flex: 1;
+      min-width: 0;
+      overflow-wrap: break-word;
     }
 
     .pipe-sep {
       color: rgba(255, 255, 255, 0.25);
       font-size: 0.65rem;
       flex-shrink: 0;
+      line-height: 1.35;
     }
 
     .pipe-right {
@@ -2088,10 +2091,16 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       font-weight: 500;
       color: var(--c-accent-amber);
       line-height: 1.35;
-      flex-shrink: 0;
+      flex-shrink: 1;
       text-align: right;
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-break: normal;
+      max-width: 65%;
       display: inline-flex;
       align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
     }
 
     .pipe-code {
@@ -2786,12 +2795,14 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       }
       .pipe-left {
         font-size: 0.66rem;
+        min-width: 0;
       }
       .pipe-sep {
         font-size: 0.60rem;
       }
       .pipe-right {
         font-size: 0.62rem;
+        max-width: 65%;
       }
       .pipe-code {
         font-size: 0.58rem;
@@ -3455,7 +3466,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
                   <div class="edu-meta">2006 - 2012 <span class="meta-sep">|</span> <span class="edu-status">Graduated</span></div>
                 </div>
                 <div class="quick-edu-item">
-                  <div class="edu-school">Ibnul Qayyim Islamic Boarding Junior High School for Boys</div>
+                  <div class="edu-school">Ibnul Qayyim Islamic Boarding Junior High School</div>
                   <div class="edu-meta">2013 - 2015 <span class="meta-sep">|</span> <span class="edu-status">Graduated</span></div>
                 </div>
                 <div class="quick-edu-item">
@@ -3522,7 +3533,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
                 <div class="quick-pipe-item">
                   <span class="pipe-left">Adventure</span>
                   <span class="pipe-sep">|</span>
-                  <span class="pipe-right">mountain hiking, traveling</span>
+                  <span class="pipe-right">mountain hiking, travelling</span>
                 </div>
               </div>
             </div>
