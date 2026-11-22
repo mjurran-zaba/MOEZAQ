@@ -639,22 +639,21 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     .drawer-board-img {
       width: 100%;
       height: auto;
-      aspect-ratio: 720 / 480;
+      aspect-ratio: 1920 / 1280;
       display: block;
       object-fit: cover;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: auto;
     }
 
-    /* Vignette Overlay: Menghitamkan tepian gambar dengan gradasi radial & linear lembut */
+    /* Vignette Halus & Minimal: Hanya melembutkan sudut terluar tanpa menutupi teks */
     .drawer-board-vignette {
       position: absolute;
       inset: 0;
       pointer-events: none;
       border-radius: 12px;
-      background:
-        radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(5, 7, 10, 0.45) 72%, rgba(5, 7, 10, 0.88) 100%),
-        linear-gradient(to top, rgba(5, 7, 10, 0.50) 0%, transparent 25%),
-        linear-gradient(to bottom, rgba(5, 7, 10, 0.35) 0%, transparent 20%);
-      box-shadow: inset 0 0 20px 4px rgba(5, 7, 10, 0.75);
+      background: radial-gradient(ellipse at 50% 50%, transparent 72%, rgba(5, 7, 10, 0.18) 88%, rgba(5, 7, 10, 0.48) 100%);
+      box-shadow: inset 0 0 8px rgba(5, 7, 10, 0.30);
     }
 
     /* Footer Comms Bar di Bawah Drawer */
@@ -3258,8 +3257,8 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
           class="drawer-board-img"
           loading="lazy"
           decoding="async"
-          width="720"
-          height="480"
+          width="1920"
+          height="1280"
         />
       </picture>
       <div class="drawer-board-vignette" aria-hidden="true"></div>
