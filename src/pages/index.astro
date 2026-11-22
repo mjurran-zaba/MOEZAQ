@@ -1952,7 +1952,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       width: 13px;
       height: 13px;
       color: rgba(255, 255, 255, 0.60);
-      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+      transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s ease;
       flex-shrink: 0;
     }
 
@@ -2029,7 +2029,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       pointer-events: none !important;
     }
 
-    /* Saat card terbuka: tampil dengan animasi expand halus */
+    /* Saat card terbuka: tampil dengan animasi expand halus, alami & anggun */
     .about-quick-card.is-expanded .quick-card-body {
       display: block !important;
       height: auto !important;
@@ -2037,7 +2037,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       overflow: hidden !important;
       visibility: visible !important;
       opacity: 1 !important;
-      animation: quickCardExpand 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: quickCardExpand 0.40s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
     .quick-card-body-inner {
@@ -2057,16 +2057,31 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       overflow: hidden !important;
       visibility: visible !important;
       opacity: 1 !important;
+      animation: quickBodyInnerFade 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
     @keyframes quickCardExpand {
-      from {
+      0% {
         opacity: 0;
-        transform: translateY(-4px);
+        max-height: 0;
+        transform: translateY(-8px);
       }
-      to {
+      100% {
         opacity: 1;
+        max-height: 380px;
         transform: translateY(0);
+      }
+    }
+
+    @keyframes quickBodyInnerFade {
+      0% {
+        opacity: 0;
+      }
+      40% {
+        opacity: 0.35;
+      }
+      100% {
+        opacity: 1;
       }
     }
 
@@ -3083,10 +3098,10 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
             </div>
           </div>
 
-          <!-- 2. Role exp -->
-          <div class="about-quick-card" id="quick-card-roleexp" role="button" tabindex="0" aria-expanded="false" aria-label="Role exp Details">
+          <!-- 2. Role Exp -->
+          <div class="about-quick-card" id="quick-card-roleexp" role="button" tabindex="0" aria-expanded="false" aria-label="Role Exp Details">
             <div class="quick-card-header">
-              <span class="quick-card-title">Role exp</span>
+              <span class="quick-card-title">Role Exp</span>
               <svg class="quick-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
@@ -3107,6 +3122,11 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
                   <span class="pipe-left">Crew Deck Longline Ship</span>
                   <span class="pipe-sep">|</span>
                   <span class="pipe-right">2 years</span>
+                </div>
+                <div class="quick-pipe-item">
+                  <span class="pipe-left">Islamic Dormitory Mentor</span>
+                  <span class="pipe-sep">|</span>
+                  <span class="pipe-right">1 year</span>
                 </div>
               </div>
             </div>
