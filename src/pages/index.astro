@@ -417,13 +417,14 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       position: fixed;
       top: 0;
       left: 0;
-      width: min(270px, 47.5vw);
+      width: min(320px, 78vw);
       height: 100vh;
+      height: 100dvh;
       z-index: 100;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 18px 12px;
+      padding: 18px 16px;
       transform: translate3d(-100%, 0, 0);
       transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
       overflow-x: hidden;
@@ -1874,6 +1875,19 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       text-shadow: 0 1px 6px rgba(0, 0, 0, 0.85);
     }
 
+    .about-hero-author {
+      display: block;
+      margin-top: 10px;
+      text-align: right;
+      font-style: italic;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--c-accent-amber);
+      letter-spacing: 0.03em;
+      opacity: 0.90;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+    }
+
     /*
       Clipping Horizon Divider: Razor-sharp glowing threshold that "swallows"
       content scrolling beneath it.
@@ -2880,6 +2894,14 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         font-size: 0.74rem;
         line-height: 1.38;
       }
+      .about-hero-author {
+        margin-top: 7px;
+        font-size: 0.64rem;
+      }
+      .drawer-panel {
+        width: min(300px, 78vw);
+        padding: 16px 14px;
+      }
       #about-divider-top {
         margin-top: 10px;
         margin-bottom: 8px;
@@ -3162,6 +3184,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
             <p class="about-hero-quote">
               &ldquo;If you chase comfort, you will lose the truth along the way. But if you have the courage to chase the truth, you will end up with both. Because real comfort is only found on the other side of the truth.&rdquo;
             </p>
+            <cite class="about-hero-author">~ Whisper of The Void</cite>
           </div>
         </div>
 
