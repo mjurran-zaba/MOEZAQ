@@ -1,0 +1,22 @@
+{
+  "name": "moezaq",
+  "version": "1.0.0",
+  "description": "Personal landing page for Muhammad Zaqi Prasetyo built with Astro.",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "keywords": [
+    "portfolio",
+    "astro",
+    "landing-page",
+    "notez"
+  ],
+  "author": "Muhammad Zaqi Prasetyo <mjurran@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "astro": "^5.4.2"
+  }
+}
