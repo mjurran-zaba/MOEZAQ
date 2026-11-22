@@ -779,8 +779,8 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       transform: scaleX(0);
       transform-origin: center center;
       transition:
-        opacity 0.6s ease,
-        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .divider-sep.revealed {
@@ -1729,12 +1729,13 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         inset 1.5px 1.5px 2.5px rgba(255, 255, 255, 0.32),
         inset -2px -2px 5px rgba(0, 0, 0, 0.38);
 
-      /* Spawn Logic: Faded Zoom Out */
+      /* Spawn Logic: Smooth Faded Zoom Out */
       opacity: 0;
-      transform: scale(1.18);
+      transform: scale(1.15);
+      will-change: transform, opacity;
       transition:
-        opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .about-photo-card.revealed {
@@ -1795,13 +1796,13 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         inset 1.5px 1.5px 2.5px rgba(255, 255, 255, 0.32),
         inset -2px -2px 5px rgba(0, 0, 0, 0.38);
 
-      /* Spawn Logic: Slide to Left */
+      /* Spawn Logic: Smooth Slide to Left */
       opacity: 0;
-      transform: translate3d(48px, 0, 0);
+      transform: translate3d(36px, 0, 0);
       will-change: transform, opacity;
       transition:
-        opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 0.90s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.90s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .about-hero-card.revealed {
@@ -1882,13 +1883,13 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         inset 1px 1px 1.5px rgba(255, 255, 255, 0.26),
         inset -1px -1px 2px rgba(0, 0, 0, 0.28);
 
-      /* Spawn Logic: Smooth Slide to Right */
+      /* Spawn Logic: Luxurious Smooth Slide to Right */
       opacity: 0;
-      transform: translate3d(-40px, 0, 0);
+      transform: translate3d(-32px, 0, 0);
       will-change: transform, opacity;
       transition:
-        opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.82s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.82s cubic-bezier(0.22, 1, 0.36, 1),
         background 0.25s ease,
         border-color 0.25s ease,
         box-shadow 0.25s ease;
@@ -2205,13 +2206,13 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         inset 1.5px 1.5px 2px rgba(255, 255, 255, 0.25),
         inset -1.5px -1.5px 4px rgba(0, 0, 0, 0.35);
 
-      /* Spawn Logic: Slide to Left */
+      /* Spawn Logic: Smooth Slide to Left */
       opacity: 0;
-      transform: translate3d(48px, 0, 0);
+      transform: translate3d(36px, 0, 0);
       will-change: transform, opacity;
       transition:
-        opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 0.90s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.90s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .about-story-card::-webkit-scrollbar {
@@ -3302,29 +3303,33 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     const drawerPanel = document.getElementById("drawer-panel");
     const drawerBackdrop = document.getElementById("drawer-backdrop");
 
-    // SPAWN SINKRON PORTFOLIO (LANGSUNG TAMPIL ELEGAN SAAT BUKA LINK)
+    // SPAWN SINKRON PORTFOLIO (LUXURIOUS NATURAL GLIDE & SEQUENTIAL QUICK CARDS)
     function runPortfolioSpawn() {
+      // Topbar muncul lembut
       topbarEl.classList.add("revealed");
 
-      // Wave 1: Kartu Foto + Hero Card + Divider Top meluncur bersamaan (50ms)
+      // Wave 1: Kartu Foto (smooth faded zoom out) + Hero Quote Card + Garis Pembatas (60ms)
       setTimeout(() => {
         aboutPhotoCard.classList.add("revealed");
         aboutHeroCard.classList.add("revealed");
-        aboutDividerTop.classList.add("revealed");
+        if (aboutDividerTop) aboutDividerTop.classList.add("revealed");
 
-        // Wave 2: Story Card biografi RPG meluncur masuk (140ms)
+        // Wave 2: Story Card biografi RPG meluncur halus ke posisinya (200ms)
         setTimeout(() => {
           aboutStoryCard.classList.add("revealed");
 
-          // Wave 3: 6 Quick Cards meluncur berurutan halus (staggered 45ms)
-          quickCards.forEach((card, idx) => {
-            setTimeout(() => {
-              card.classList.add("revealed");
-            }, idx * 45);
-          });
-        }, 120);
+          // Wave 3: 6 Quick Cards meluncur bergantian satu per satu secara berurutan & smooth (interval 110ms)
+          setTimeout(() => {
+            quickCards.forEach((card, idx) => {
+              setTimeout(() => {
+                card.classList.add("revealed");
+              }, idx * 110);
+            });
+          }, 110);
 
-      }, 50);
+        }, 180);
+
+      }, 60);
     }
 
     // INTERAKSI ACCORDION QUICK CARDS
