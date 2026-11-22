@@ -444,6 +444,35 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       transform: translateX(0);
     }
 
+    /* Forge Armory Background Image Layer */
+    .drawer-forge-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .drawer-forge-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: brightness(0.68) contrast(1.18) saturate(1.10);
+      transform: scale(1.02);
+    }
+
+    .drawer-forge-scrim {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(6, 9, 14, 0.74) 0%, rgba(6, 9, 14, 0.48) 35%, rgba(6, 9, 14, 0.85) 100%),
+        radial-gradient(ellipse at 50% 50%, transparent 25%, rgba(6, 9, 14, 0.65) 100%);
+    }
+
     /* Optimasi Kinerja: Hentikan total animasi aurora dan floating saat drawer tertutup */
     .drawer-panel:not(.open) .aurora-blob,
     .drawer-panel:not(.open) .drawer-glass-card {
@@ -458,7 +487,9 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       height: 100%;
       overflow: hidden;
       pointer-events: none;
-      z-index: 0;
+      z-index: 1;
+      opacity: 0.78;
+      mix-blend-mode: screen;
     }
 
     .aurora-blob {
@@ -515,10 +546,12 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     }
 
     .drawer-top-bar,
+    .drawer-board-card,
+    .drawer-comms-row,
     .drawer-center-wrap,
     .drawer-bottom-bar {
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
     .drawer-top-bar {
@@ -793,40 +826,11 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       align-items: center;
       transform: scale(0.92) translateY(12px);
       transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
     }
 
     .lightbox-overlay.active .lightbox-dialog {
       transform: scale(1) translateY(0);
-    }
-
-    .btn-lightbox-close {
-      position: absolute;
-      top: -42px;
-      right: 0;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      background: rgba(16, 22, 32, 0.88);
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background 0.16s ease, transform 0.16s ease, border-color 0.16s ease;
-      touch-action: manipulation;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.60);
-    }
-
-    .btn-lightbox-close:hover {
-      background: rgba(229, 179, 66, 0.25);
-      border-color: rgba(229, 179, 66, 0.60);
-      color: var(--c-accent-amber);
-      transform: scale(1.08);
-    }
-
-    .btn-lightbox-close:active {
-      transform: scale(0.92);
     }
 
     .lightbox-image-wrap {
@@ -857,11 +861,14 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     .lightbox-caption {
       margin-top: 10px;
       font-family: var(--font-mono);
-      font-size: 0.66rem;
-      font-weight: 700;
+      font-size: 0.68rem;
+      font-weight: 800;
       color: var(--c-accent-amber);
-      letter-spacing: 0.10em;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       text-shadow: 0 1px 4px rgba(0, 0, 0, 0.90);
+      cursor: pointer;
+      user-select: none;
     }
 
     @media (max-width: 480px) {
@@ -905,10 +912,11 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     .drawer-bottom-caption {
       font-family: var(--font-mono);
       font-size: 0.68rem;
-      font-weight: 700;
-      color: var(--c-text-muted);
-      letter-spacing: 0.10em;
+      font-weight: 800;
+      color: var(--c-accent-amber);
+      letter-spacing: 0.12em;
       text-transform: uppercase;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.90);
     }
 
     /* Content Shell (Pinned Fixed Identity Horizon Frame) */
@@ -2277,6 +2285,22 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       transform: translate3d(0, 0, 0);
     }
 
+    /* Sticky & Slide Active State (Touch Hold & Drag) */
+    .about-quick-card.is-sticky-dragging {
+      z-index: 35 !important;
+      cursor: grabbing !important;
+      border-color: rgba(229, 179, 66, 0.70) !important;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.12) 100%),
+        rgba(26, 36, 52, 0.65) !important;
+      box-shadow:
+        0 18px 40px -6px rgba(0, 0, 0, 0.90),
+        0 0 22px rgba(229, 179, 66, 0.40),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.38) !important;
+      transition: none !important;
+      touch-action: none !important;
+    }
+
 
 
     .about-quick-card:hover {
@@ -3391,6 +3415,21 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
   <aside class="drawer-panel" id="drawer-panel" aria-label="Menu Samping">
 
+    <!-- Forge Armory Background Image Layer -->
+    <div class="drawer-forge-bg" aria-hidden="true">
+      <picture>
+        <source srcset={`${baseUrl}/assets/forge_armory_bg.webp`} type="image/webp">
+        <img
+          src={`${baseUrl}/assets/forge_armory_bg.jpg`}
+          alt="Forge Armory Background"
+          class="drawer-forge-img"
+          loading="eager"
+          decoding="async"
+        />
+      </picture>
+      <div class="drawer-forge-scrim"></div>
+    </div>
+
     <div class="drawer-aurora-canvas">
       <div class="aurora-blob aurora-blob-gold"></div>
       <div class="aurora-blob aurora-blob-velvet"></div>
@@ -3485,7 +3524,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     <!-- Footer Drawer: Caption -->
     <div class="drawer-bottom-bar">
       <p class="drawer-bottom-caption">
-        &copy; 2026 &bull; FOR NOTHING
+        LONG LIVE THE MAJESTY
       </p>
     </div>
 
@@ -3499,20 +3538,10 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     aria-modal="true"
     aria-label="Preview Papan Commissions Open"
     tabindex="-1"
+    onclick="closeCommsLightbox()"
   >
-    <div class="lightbox-backdrop" onclick="closeCommsLightbox()"></div>
-    <div class="lightbox-dialog">
-      <button
-        class="btn-lightbox-close"
-        onclick="closeCommsLightbox()"
-        aria-label="Tutup Preview"
-        title="Tutup Preview (Esc)"
-      >
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
+    <div class="lightbox-backdrop"></div>
+    <div class="lightbox-dialog" onclick="closeCommsLightbox()">
       <div class="lightbox-image-wrap">
         <picture>
           <source srcset={`${baseUrl}/assets/comms_board.webp`} type="image/webp">
@@ -3526,7 +3555,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         </picture>
       </div>
       <div class="lightbox-caption">
-        <span>COMMISSIONS OPEN &bull; QUEST BOARD</span>
+        <span>NEGOTIABLE BOUNTY</span>
       </div>
     </div>
   </div>
@@ -3869,13 +3898,128 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       }, 60);
     }
 
-    // INTERAKSI ACCORDION QUICK CARDS
+    // INTERAKSI ACCORDION QUICK CARDS + HOLD & SLIDE STICKY GESTURE
     function setupQuickCardsAccordion() {
       quickCards.forEach(card => {
+        let holdTimer = null;
+        let isHolding = false;
+        let isDragging = false;
+        let startX = 0;
+        let startY = 0;
+        let deltaY = 0;
+        let wasDragged = false;
+        let activePointerId = null;
+
+        // Pointer down: Catat koordinat sentuhan jari & pasang timer hold
+        card.addEventListener("pointerdown", (e) => {
+          if (e.button !== 0 && e.pointerType === "mouse") return;
+
+          startX = e.clientX;
+          startY = e.clientY;
+          deltaY = 0;
+          isHolding = false;
+          isDragging = false;
+          activePointerId = e.pointerId;
+
+          // Timer hold: 190ms untuk membedakan sentuhan jari hold dari tap biasa
+          holdTimer = setTimeout(() => {
+            isHolding = true;
+            isDragging = true;
+            wasDragged = true;
+            card.classList.add("is-sticky-dragging");
+
+            try {
+              card.setPointerCapture(activePointerId);
+            } catch (_) {}
+
+            if (navigator.vibrate) navigator.vibrate(14);
+            card.style.transform = "translate3d(0, 0, 0) scale(1.035)";
+          }, 190);
+        });
+
+        // Pointer move: geser ke atas dan ke bawah saat sentuhan jari hold terdeteksi
+        card.addEventListener("pointermove", (e) => {
+          if (activePointerId !== e.pointerId) return;
+
+          const moveX = e.clientX - startX;
+          const moveY = e.clientY - startY;
+
+          // Jika belum terpicu hold tapi jari sudah bergerak > 8px (scrolling wajar): batalkan timer hold
+          if (!isHolding) {
+            if (Math.hypot(moveX, moveY) > 8) {
+              if (holdTimer) {
+                clearTimeout(holdTimer);
+                holdTimer = null;
+              }
+            }
+            return;
+          }
+
+          // Jika hold sudah aktif: lakukan animasi sticky dan slide vertikal dengan resistensi elastis
+          if (isDragging) {
+            deltaY = moveY;
+            const maxTravel = 68;
+            const clampedDeltaY = Math.sign(deltaY) * Math.min(Math.abs(deltaY) * 0.72, maxTravel);
+            const intensity = Math.min(Math.abs(clampedDeltaY) / maxTravel, 1);
+
+            card.style.transform = `translate3d(0, ${clampedDeltaY}px, 0) scale(${1.035 + intensity * 0.015})`;
+            card.style.boxShadow = `0 ${18 + intensity * 8}px 42px -6px rgba(0, 0, 0, 0.92), 0 0 ${20 + intensity * 14}px rgba(229, 179, 66, ${0.30 + intensity * 0.25}), inset 1px 1px 2px rgba(255, 255, 255, 0.38)`;
+
+            if (e.cancelable) e.preventDefault();
+          }
+        });
+
+        // Pointer up / cancel: Snap-back pegas elastis ke posisi semula
+        const endGesture = (e) => {
+          if (holdTimer) {
+            clearTimeout(holdTimer);
+            holdTimer = null;
+          }
+
+          if (activePointerId !== null && activePointerId === e.pointerId) {
+            try {
+              card.releasePointerCapture(activePointerId);
+            } catch (_) {}
+            activePointerId = null;
+          }
+
+          if (isDragging || isHolding) {
+            isDragging = false;
+            isHolding = false;
+
+            // Animasi spring snap-back yang memantul anggun & presisi
+            card.style.transition = "transform 0.44s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s ease, border-color 0.35s ease";
+            card.style.transform = "translate3d(0, 0, 0) scale(1)";
+            card.style.boxShadow = "";
+
+            if (navigator.vibrate) navigator.vibrate(8);
+
+            setTimeout(() => {
+              card.classList.remove("is-sticky-dragging");
+              card.style.transition = "";
+              card.style.transform = "";
+            }, 450);
+
+            // Blokir trigger click accordion jika baru saja selesai di-drag
+            setTimeout(() => {
+              wasDragged = false;
+            }, 140);
+          }
+        };
+
+        card.addEventListener("pointerup", endGesture);
+        card.addEventListener("pointercancel", endGesture);
+
+        // Click handler: Expand / Collapse accordion (hanya saat tap biasa, bukan hold & slide)
         card.addEventListener("click", (e) => {
+          if (wasDragged) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+          }
           e.stopPropagation();
           const isExpanded = card.classList.contains("is-expanded");
-          
+
           quickCards.forEach(c => {
             if (c !== card) {
               c.classList.remove("is-expanded");
@@ -3940,7 +4084,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
     // TACTILE FEEDBACK PADA ELEMEN INTERAKTIF
     function setupTactileFeedback() {
-      const interactiveEls = document.querySelectorAll(".btn-topbar-panel, .story-link-item, .about-quick-card, .drawer-comm-btn, .drawer-board-card, .btn-lightbox-close, .drawer-crest-pill");
+      const interactiveEls = document.querySelectorAll(".btn-topbar-panel, .story-link-item, .about-quick-card, .drawer-comm-btn, .drawer-board-card, .drawer-crest-pill");
       interactiveEls.forEach(card => {
         const pressOn = () => card.classList.add("is-pressed");
         const pressOff = () => setTimeout(() => card.classList.remove("is-pressed"), 80);
