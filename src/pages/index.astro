@@ -65,16 +65,20 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       -webkit-tap-highlight-color: transparent;
     }
 
+    html, body {
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+    }
+
     body {
       background-color: #05070a;
       color: var(--c-text-primary);
       font-family: var(--font-sans);
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       position: relative;
-      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -155,18 +159,34 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       flex: 1;
     }
 
-        .topbar-badge {
+    /* Industrial Rivet / Bolt Dots for Badges */
+    .badge-bolt {
+      display: inline-block;
+      width: 4.5px;
+      height: 4.5px;
+      border-radius: 50%;
+      background: #94a3b8; /* tactile metallic steel grey */
+      box-shadow:
+        inset 0.5px 0.5px 1px rgba(255, 255, 255, 0.5),
+        0 0.5px 1.5px rgba(0, 0, 0, 0.75);
+      flex-shrink: 0;
+    }
+
+    .topbar-badge {
       font-family: var(--font-mono);
       font-size: 0.64rem;
       font-weight: 700;
       color: var(--c-accent-amber);
-      padding: 3px 9px;
+      padding: 3px 8px;
       border-radius: 999px;
       background: rgba(245, 158, 11, 0.12);
       border: 1px solid rgba(245, 158, 11, 0.28);
       letter-spacing: 0.05em;
       text-transform: uppercase;
       box-shadow: 0 0 10px rgba(245, 158, 11, 0.15);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .topbar-right-zone {
@@ -626,17 +646,20 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       text-transform: uppercase;
     }
 
-    /* Content Shell */
+    /* Content Shell (Pinned Fixed Identity Horizon Frame) */
     .content-shell {
       max-width: 680px;
       margin: 0 auto;
-      padding: 66px 18px 52px;
+      padding: 56px 18px 0;
       width: 100%;
+      height: 100vh;
+      height: 100dvh;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      flex: 1;
       position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
     }
 
     /*
@@ -1689,26 +1712,31 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
     /*
       ======================================================
-      ZONA 3: PANGGUNG ABOUT ME (ABOUT ME STAGE ZONE)
+      ZONA 3: PANGGUNG ABOUT ME (PINNED IDENTITY HORIZON)
       ======================================================
     */
     .about-stage-zone {
       display: flex;
       flex-direction: column;
       width: 100%;
+      height: 100%;
       position: relative;
+      overflow: hidden;
     }
 
     .about-stage-zone.is-active {
       display: flex;
     }
 
+    /* Pinned Identity Row: Photo Card + Hero Card remain firmly seated */
     .about-hero-row {
       display: flex;
       align-items: stretch;
       gap: 12px;
       width: 100%;
       position: relative;
+      flex-shrink: 0;
+      z-index: 10;
     }
 
     /* KARTU FOTO (TOP-LEFT): FADED ZOOM OUT (FADED WHITE MILK 45%) */
@@ -1841,13 +1869,26 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       text-shadow: 0 1px 6px rgba(0, 0, 0, 0.85);
     }
 
+    /*
+      Clipping Horizon Divider: Razor-sharp glowing threshold that "swallows"
+      content scrolling beneath it.
+    */
     #about-divider-top {
-      margin-top: 20px;
-      margin-bottom: 16px;
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+      left: 0;
+      right: 0;
+      margin-top: 14px;
+      margin-bottom: 10px;
+      flex-shrink: 0;
+      z-index: 10;
     }
 
     /*
-      BAGIAN BAWAH ABOUT ME: QUICK CARDS (KIRI) + STORY CARD (KANAN)
+      BAGIAN BAWAH ABOUT ME: SCROLLABLE INTERNAL VIEWPORT
+      Kartu di bawah garis pembatas dapat di-scroll lancar, dan ketika menyentuh
+      garis pembatas akan memudar halus (efek tertelan kabut obsidian).
     */
     .about-bottom-zone {
       width: 100%;
@@ -1856,6 +1897,32 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       gap: 12px;
       align-items: flex-start;
       position: relative;
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+      padding-top: 6px;
+      padding-bottom: 28px;
+      mask-image: linear-gradient(to bottom, transparent 0px, black 14px, black 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0px, black 14px, black 100%);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(229, 179, 66, 0.22) transparent;
+    }
+
+    .about-bottom-zone::-webkit-scrollbar {
+      width: 4px;
+    }
+    .about-bottom-zone::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .about-bottom-zone::-webkit-scrollbar-thumb {
+      background: rgba(229, 179, 66, 0.22);
+      border-radius: 999px;
+    }
+    .about-bottom-zone::-webkit-scrollbar-thumb:hover {
+      background: rgba(229, 179, 66, 0.45);
     }
 
     /* Kolom Kiri: 5 Card 1 Baris (Expand to Down saat di-tap) */
@@ -2113,9 +2180,12 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       font-weight: 500;
       color: #f1f5f9;
       line-height: 1.35;
-      flex: 1;
-      min-width: 0;
-      overflow-wrap: break-word;
+      flex: 0 0 auto;
+      max-width: 58%;
+      white-space: normal;
+      word-break: normal;
+      overflow-wrap: normal;
+      hyphens: none;
     }
 
     .pipe-sep {
@@ -2130,12 +2200,12 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       font-weight: 500;
       color: var(--c-accent-amber);
       line-height: 1.35;
-      flex-shrink: 1;
+      flex: 1 1 auto;
+      min-width: 0;
       text-align: right;
       white-space: normal;
-      overflow-wrap: break-word;
       word-break: normal;
-      max-width: 65%;
+      overflow-wrap: normal;
       display: inline-flex;
       align-items: center;
       justify-content: flex-end;
@@ -2266,9 +2336,12 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       background: rgba(229, 179, 66, 0.20);
       color: #fef08a;
       border: 1px solid rgba(229, 179, 66, 0.40);
-      padding: 3px 9px;
+      padding: 3px 8px;
       border-radius: 6px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .about-story-body {
@@ -2671,7 +2744,9 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         font-size: 0.65rem;
       }
       .content-shell {
-        padding: 60px 14px 44px;
+        padding: 50px 14px 0;
+        height: 100vh;
+        height: 100dvh;
       }
       .header-card {
         padding: 12px 14px;
@@ -2791,11 +2866,15 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         line-height: 1.38;
       }
       #about-divider-top {
-        margin-top: 16px;
-        margin-bottom: 12px;
+        margin-top: 10px;
+        margin-bottom: 8px;
       }
       .about-bottom-zone {
         gap: 8px;
+        padding-top: 4px;
+        padding-bottom: 22px;
+        mask-image: linear-gradient(to bottom, transparent 0px, black 12px, black 100%);
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0px, black 12px, black 100%);
       }
       .about-quick-cards {
         flex: 0 0 calc(50% - 4px);
@@ -2834,7 +2913,9 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       }
       .pipe-left {
         font-size: 0.66rem;
-        min-width: 0;
+        word-break: normal;
+        overflow-wrap: normal;
+        hyphens: none;
       }
       .pipe-sep {
         font-size: 0.60rem;
@@ -2971,13 +3052,16 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       </button>
 
       <div class="topbar-title" id="topbar-title">
-        <span class="topbar-title-dot"></span>
         <span id="topbar-title-text">MUHAMMAD ZAQI PRASETYO</span>
       </div>
     </div>
 
     <div class="topbar-right-zone">
-      <span class="topbar-badge">PLAYER STATS</span>
+      <span class="topbar-badge">
+        <span class="badge-bolt" aria-hidden="true"></span>
+        <span>PLAYER STATS</span>
+        <span class="badge-bolt" aria-hidden="true"></span>
+      </span>
     </div>
   </nav>
 
@@ -3162,7 +3246,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
                   <span class="pipe-right">Anime Series</span>
                 </div>
                 <div class="quick-pipe-item">
-                  <span class="pipe-left">Adventure</span>
+                  <span class="pipe-left" style="white-space: nowrap; flex-shrink: 0;">Adventure</span>
                   <span class="pipe-sep">|</span>
                   <span class="pipe-right">mountain hiking, travelling</span>
                 </div>
@@ -3265,7 +3349,11 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         <!-- KANAN: CARD BIOGRAFI RPG (LEBAR SETENGAH LAYAR) -->
         <article class="about-story-card" id="about-story-card" aria-label="Biografi dan Perjalanan Muhammad Zaqi Prasetyo">
           <div class="about-story-header">
-            <span class="story-pill-badge">LOG ENTRY</span>
+            <span class="story-pill-badge">
+              <span class="badge-bolt" aria-hidden="true"></span>
+              <span>LOG ENTRY</span>
+              <span class="badge-bolt" aria-hidden="true"></span>
+            </span>
           </div>
 
           <div class="about-story-body">
@@ -3331,6 +3419,32 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
     const drawerPanel = document.getElementById("drawer-panel");
     const drawerBackdrop = document.getElementById("drawer-backdrop");
+
+    // FORWARD WHEEL & TOUCH SCROLL FROM PINNED HERO ROW TO BOTTOM SCROLL ZONE
+    const pinnedHeroRow = document.getElementById("about-hero-row");
+    const bottomScrollZone = document.getElementById("about-bottom-zone");
+
+    if (pinnedHeroRow && bottomScrollZone) {
+      pinnedHeroRow.addEventListener("wheel", (e) => {
+        bottomScrollZone.scrollTop += e.deltaY;
+      }, { passive: true });
+
+      let touchStartY = 0;
+      pinnedHeroRow.addEventListener("touchstart", (e) => {
+        if (e.touches && e.touches.length > 0) {
+          touchStartY = e.touches[0].clientY;
+        }
+      }, { passive: true });
+
+      pinnedHeroRow.addEventListener("touchmove", (e) => {
+        if (e.touches && e.touches.length > 0) {
+          const currentY = e.touches[0].clientY;
+          const diff = touchStartY - currentY;
+          bottomScrollZone.scrollTop += diff;
+          touchStartY = currentY;
+        }
+      }, { passive: true });
+    }
 
     // SPAWN SINKRON PORTFOLIO (LUXURIOUS NATURAL GLIDE & SEQUENTIAL QUICK CARDS)
     function runPortfolioSpawn() {
