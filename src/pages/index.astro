@@ -519,61 +519,55 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-bottom: 14px;
+      padding-bottom: 12px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .drawer-brand {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-    }
-
-    .btn-drawer-close {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      background: rgba(255, 255, 255, 0.08);
-      color: #f1f5f9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
       position: relative;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
+      z-index: 1;
+      width: 100%;
+    }
+
+    .drawer-brand-zone {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .drawer-logo-icon {
+      width: auto;
+      height: 32px;
+      max-height: 32px;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 8px rgba(229, 179, 66, 0.28));
+      transition: transform 0.2s ease;
+      cursor: default;
+    }
+
+    .drawer-logo-icon:hover {
+      transform: scale(1.08) rotate(-2deg);
+    }
+
+    /* Badge HALL OF VOID di Mepet Kanan Drawer */
+    .drawer-badge-void {
+      font-family: var(--font-mono);
+      font-size: 0.60rem;
+      font-weight: 800;
+      color: var(--c-accent-amber);
+      padding: 3.5px 8.5px;
+      border-radius: 999px;
+      background:
+        linear-gradient(180deg, rgba(229, 179, 66, 0.16) 0%, rgba(229, 179, 66, 0.04) 100%),
+        rgba(15, 20, 28, 0.88);
+      border: 1px solid rgba(229, 179, 66, 0.30);
+      letter-spacing: 0.075em;
+      text-transform: uppercase;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.50), 0 0 8px rgba(229, 179, 66, 0.12);
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      margin-left: auto;
       user-select: none;
       -webkit-user-select: none;
-      transition: background 0.14s ease, color 0.14s ease, transform 0.14s ease;
-    }
-
-    /* Hit-box diperlebar 48x48px agar sentuhan jari selalu akurat 100% */
-    .btn-drawer-close::before {
-      content: "";
-      position: absolute;
-      top: -10px;
-      bottom: -10px;
-      left: -10px;
-      right: -10px;
-      min-width: 48px;
-      min-height: 48px;
-    }
-
-    .btn-drawer-close:hover {
-      background: rgba(255, 255, 255, 0.14);
-      color: #ffffff;
-      transform: rotate(90deg);
-    }
-
-    .btn-drawer-close:active {
-      transform: scale(0.92);
-      background: rgba(255, 255, 255, 0.22);
     }
 
     .drawer-center-wrap {
@@ -581,37 +575,14 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px 0;
+      padding: 16px 0;
     }
 
-    .drawer-glass-card {
-      width: 100%;
-      border-radius: 14px;
-      padding: 16px 12px;
-      text-align: center;
-      background:
-        radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.15) 0%, transparent 70%),
-        rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      box-shadow:
-        0 16px 36px -8px rgba(0, 0, 0, 0.70),
-        inset 1.5px 1.5px 2px rgba(255, 255, 255, 0.24),
-        inset -2px -2px 5px rgba(0, 0, 0, 0.40);
-      animation: floatGentle 4s ease-in-out infinite;
-    }
-
-    @keyframes floatGentle {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
-
-    /* Tavern Quest & Commissions Board dengan Sentuhan Vignette Elegan */
+    /* Tavern Quest & Commissions Board dengan Lightbox Trigger */
     .drawer-board-card {
       position: relative;
       width: 100%;
-      margin-top: 14px;
+      margin-top: 13px;
       border-radius: 12px;
       overflow: hidden;
       background: #05070a;
@@ -622,6 +593,8 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         inset 1px 1px 1.5px rgba(255, 255, 255, 0.15);
       flex-shrink: 0;
       z-index: 2;
+      cursor: zoom-in;
+      touch-action: manipulation;
       transition:
         transform 0.22s ease,
         border-color 0.22s ease,
@@ -629,11 +602,15 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     }
 
     .drawer-board-card:hover {
-      border-color: rgba(229, 179, 66, 0.45);
+      border-color: rgba(229, 179, 66, 0.48);
       box-shadow:
         0 14px 34px -6px rgba(0, 0, 0, 0.90),
-        0 0 22px rgba(229, 179, 66, 0.18);
+        0 0 22px rgba(229, 179, 66, 0.22);
       transform: translateY(-1px);
+    }
+
+    .drawer-board-card:active {
+      transform: scale(0.985);
     }
 
     .drawer-board-img {
@@ -656,24 +633,43 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       box-shadow: inset 0 0 8px rgba(5, 7, 10, 0.30);
     }
 
-    /* Footer Comms Bar di Bawah Drawer */
-    .drawer-bottom-bar {
-      padding-top: 14px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    /* Subtle Zoom-In Indicator Hint */
+    .drawer-board-zoom-hint {
+      position: absolute;
+      bottom: 7px;
+      right: 7px;
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: rgba(9, 12, 17, 0.78);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(229, 179, 66, 0.32);
+      color: var(--c-accent-amber);
       display: flex;
-      flex-direction: column;
-      gap: 12px;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.85;
+      pointer-events: none;
+      transition: opacity 0.16s ease, transform 0.16s ease, background 0.16s ease;
     }
 
-    .drawer-footer-comms {
+    .drawer-board-card:hover .drawer-board-zoom-hint {
+      opacity: 1;
+      transform: scale(1.10);
+      background: rgba(229, 179, 66, 0.22);
+    }
+
+    /* Baris Kontak IG, WA, Gmail Tepat di Bawah Foto (Horizontal) */
+    .drawer-comms-row {
       display: flex;
       align-items: center;
       gap: 6px;
       width: 100%;
+      margin-top: 9px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
     }
 
     .drawer-comm-btn {
@@ -717,13 +713,144 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       flex-shrink: 0;
     }
 
+    /* Footer Caption di Bawah Drawer */
+    .drawer-bottom-bar {
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+    }
+
+    /* LIGHTBOX MODAL STYLING */
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 16px;
+    }
+
+    .lightbox-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .lightbox-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(3, 5, 8, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 0;
+    }
+
+    .lightbox-dialog {
+      position: relative;
+      z-index: 1;
+      max-width: min(94vw, 920px);
+      max-height: 90vh;
+      max-height: 90dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform: scale(0.92) translateY(12px);
+      transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .lightbox-overlay.active .lightbox-dialog {
+      transform: scale(1) translateY(0);
+    }
+
+    .btn-lightbox-close {
+      position: absolute;
+      top: -42px;
+      right: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(16, 22, 32, 0.88);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.16s ease, transform 0.16s ease, border-color 0.16s ease;
+      touch-action: manipulation;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.60);
+    }
+
+    .btn-lightbox-close:hover {
+      background: rgba(229, 179, 66, 0.25);
+      border-color: rgba(229, 179, 66, 0.60);
+      color: var(--c-accent-amber);
+      transform: scale(1.08);
+    }
+
+    .btn-lightbox-close:active {
+      transform: scale(0.92);
+    }
+
+    .lightbox-image-wrap {
+      width: 100%;
+      max-height: 80vh;
+      max-height: 80dvh;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(229, 179, 66, 0.35);
+      box-shadow:
+        0 24px 64px -8px rgba(0, 0, 0, 0.95),
+        0 0 32px rgba(229, 179, 66, 0.18);
+      background: #05070a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-img {
+      width: 100%;
+      height: auto;
+      max-height: 80vh;
+      max-height: 80dvh;
+      object-fit: contain;
+      display: block;
+    }
+
+    .lightbox-caption {
+      margin-top: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 700;
+      color: var(--c-accent-amber);
+      letter-spacing: 0.10em;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.90);
+    }
+
     @media (max-width: 480px) {
+      .drawer-logo-icon {
+        height: 29px;
+      }
+      .drawer-badge-void {
+        font-size: 0.58rem;
+        padding: 3px 8px;
+        letter-spacing: 0.065em;
+      }
       .drawer-board-card {
-        margin-top: 12px;
+        margin-top: 11px;
         border-radius: 10px;
       }
       .drawer-board-vignette {
         border-radius: 10px;
+      }
+      .drawer-comms-row {
+        margin-top: 8px;
       }
       .drawer-comm-btn {
         height: 32px;
@@ -3232,23 +3359,34 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     </div>
 
     <div class="drawer-top-bar">
-      <div class="drawer-brand">
+      <div class="drawer-brand-zone">
+        <picture>
+          <source srcset={`${baseUrl}/assets/shield_logo.webp`} type="image/webp">
+          <img
+            src={`${baseUrl}/assets/shield_logo.png`}
+            alt="Hall of Void Shield Logo"
+            class="drawer-logo-icon"
+            width="28"
+            height="33"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
+      </div>
+      <div class="drawer-badge-void">
         <span>HALL OF VOID</span>
       </div>
-      <button
-        class="btn-drawer-close"
-        onclick="toggleDrawer(false)"
-        aria-label="Tutup Drawer"
-      >
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
     </div>
 
-    <!-- Tavern Quest & Commissions Board dengan Sentuhan Vignette Elegan -->
-    <div class="drawer-board-card" id="drawer-board-card">
+    <!-- Tavern Quest & Commissions Board dengan Sentuhan Vignette Elegan & Lightbox Preview -->
+    <div
+      class="drawer-board-card"
+      id="drawer-board-card"
+      role="button"
+      tabindex="0"
+      aria-label="Lihat Preview Besar Papan Commissions Open"
+      onclick="openCommsLightbox()"
+    >
       <picture>
         <source srcset={`${baseUrl}/assets/comms_board.webp`} type="image/webp">
         <img
@@ -3262,49 +3400,98 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         />
       </picture>
       <div class="drawer-board-vignette" aria-hidden="true"></div>
+      <div class="drawer-board-zoom-hint" aria-hidden="true" title="Tap untuk perbesar">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <polyline points="9 21 3 21 3 15"></polyline>
+          <line x1="21" y1="3" x2="14" y2="10"></line>
+          <line x1="3" y1="21" x2="10" y2="14"></line>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Tautan Kontak IG, WA, Gmail Tepat di Bawah Foto (Horizontal) -->
+    <div class="drawer-comms-row">
+      <!-- 1. Instagram -->
+      <a href="https://www.instagram.com/moeza.q?evlk=MTU0MHpjNjd3azQ2eQ==" target="_blank" rel="noopener noreferrer" class="drawer-comm-btn" aria-label="Instagram Profile @moeza.q" title="Instagram @moeza.q">
+        <svg class="drawer-comm-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+        </svg>
+        <span>Instagram</span>
+      </a>
+
+      <!-- 2. WhatsApp -->
+      <a href="https://wa.me/6282145581582" target="_blank" rel="noopener noreferrer" class="drawer-comm-btn" aria-label="WhatsApp Lets Talk" title="WhatsApp Lets Talk">
+        <svg class="drawer-comm-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/>
+          <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/>
+        </svg>
+        <span>WhatsApp</span>
+      </a>
+
+      <!-- 3. Gmail -->
+      <a href="mailto:muzape@gmail.com" class="drawer-comm-btn" aria-label="Email muzape@gmail.com" title="Email muzape@gmail.com">
+        <svg class="drawer-comm-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+        </svg>
+        <span>Gmail</span>
+      </a>
     </div>
 
     <!-- Sisa Ruang Tengah Drawer: Kosong bersih untuk ide absurd -->
     <div class="drawer-center-wrap" id="drawer-center-wrap"></div>
 
-    <!-- Footer Drawer: Comms Links + Caption -->
+    <!-- Footer Drawer: Caption -->
     <div class="drawer-bottom-bar">
-      <div class="drawer-footer-comms">
-        <!-- 1. Instagram -->
-        <a href="https://www.instagram.com/moeza.q?evlk=MTU0MHpjNjd3azQ2eQ==" target="_blank" rel="noopener noreferrer" class="drawer-comm-btn" aria-label="Instagram Profile @moeza.q" title="Instagram @moeza.q">
-          <svg class="drawer-comm-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-          </svg>
-          <span>Instagram</span>
-        </a>
-
-        <!-- 2. WhatsApp -->
-        <a href="https://wa.me/6282145581582" target="_blank" rel="noopener noreferrer" class="drawer-comm-btn" aria-label="WhatsApp Lets Talk" title="WhatsApp Lets Talk">
-          <svg class="drawer-comm-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/>
-            <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/>
-          </svg>
-          <span>WhatsApp</span>
-        </a>
-
-        <!-- 3. Gmail -->
-        <a href="mailto:muzape@gmail.com" class="drawer-comm-btn" aria-label="Email muzape@gmail.com" title="Email muzape@gmail.com">
-          <svg class="drawer-comm-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-          </svg>
-          <span>Gmail</span>
-        </a>
-      </div>
-
       <p class="drawer-bottom-caption">
         &copy; 2026 &bull; FOR NOTHING
       </p>
     </div>
 
   </aside>
+
+  <!-- LIGHTBOX MODAL: FULL PREVIEW COMMISSIONS OPEN QUEST BOARD -->
+  <div
+    class="lightbox-overlay"
+    id="lightbox-comms"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Preview Papan Commissions Open"
+    tabindex="-1"
+  >
+    <div class="lightbox-backdrop" onclick="closeCommsLightbox()"></div>
+    <div class="lightbox-dialog">
+      <button
+        class="btn-lightbox-close"
+        onclick="closeCommsLightbox()"
+        aria-label="Tutup Preview"
+        title="Tutup Preview (Esc)"
+      >
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="lightbox-image-wrap">
+        <picture>
+          <source srcset={`${baseUrl}/assets/comms_board.webp`} type="image/webp">
+          <img
+            src={`${baseUrl}/assets/comms_board.jpg`}
+            alt="Commissions Open Master Preview"
+            class="lightbox-img"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+      </div>
+      <div class="lightbox-caption">
+        <span>COMMISSIONS OPEN &bull; QUEST BOARD</span>
+      </div>
+    </div>
+  </div>
 
   <!-- Content Shell -->
   <div class="content-shell" id="content-shell">
@@ -3678,6 +3865,26 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       });
     }
 
+    // LIGHTBOX PREVIEW HANDLERS
+    function openCommsLightbox() {
+      const lb = document.getElementById("lightbox-comms");
+      if (lb) {
+        lb.classList.add("active");
+        if (navigator.vibrate) navigator.vibrate(10);
+      }
+    }
+
+    function closeCommsLightbox() {
+      const lb = document.getElementById("lightbox-comms");
+      if (lb) {
+        lb.classList.remove("active");
+        if (navigator.vibrate) navigator.vibrate(8);
+      }
+    }
+
+    window.openCommsLightbox = openCommsLightbox;
+    window.closeCommsLightbox = closeCommsLightbox;
+
     // DRAWER PANEL TOGGLE (0ms pointerdown)
     function toggleDrawer(open) {
       if (open) {
@@ -3695,7 +3902,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
     // TACTILE FEEDBACK PADA ELEMEN INTERAKTIF
     function setupTactileFeedback() {
-      const interactiveEls = document.querySelectorAll(".btn-topbar-panel, .story-link-item, .about-quick-card, .drawer-comm-btn, .btn-drawer-close");
+      const interactiveEls = document.querySelectorAll(".btn-topbar-panel, .story-link-item, .about-quick-card, .drawer-comm-btn, .drawer-board-card, .btn-lightbox-close");
       interactiveEls.forEach(card => {
         const pressOn = () => card.classList.add("is-pressed");
         const pressOff = () => setTimeout(() => card.classList.remove("is-pressed"), 80);
@@ -3730,8 +3937,15 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     });
 
     window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && drawerPanel && drawerPanel.classList.contains("open")) {
-        toggleDrawer(false);
+      if (e.key === "Escape") {
+        const lb = document.getElementById("lightbox-comms");
+        if (lb && lb.classList.contains("active")) {
+          closeCommsLightbox();
+          return;
+        }
+        if (drawerPanel && drawerPanel.classList.contains("open")) {
+          toggleDrawer(false);
+        }
       }
     });
   </script>
