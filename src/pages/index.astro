@@ -197,7 +197,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       flex-shrink: 0;
     }
 
-    /* TOMBOL BACK STANDAR NOTEZ */
+    /* TOMBOL BACK STANDAR NOTEZ (RESPONSIF & HIT-BOX LEBAR) */
     .btn-topbar-back {
       height: 30px;
       min-width: 68px;
@@ -211,13 +211,13 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       justify-content: center;
       gap: 5px;
       flex-shrink: 0;
+      position: relative;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
 
       background:
         linear-gradient(135deg, rgba(184, 29, 66, 0.28) 0%, rgba(45, 122, 70, 0.24) 100%),
-        rgba(15, 20, 28, 0.45);
-
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+        rgba(10, 14, 22, 0.88);
       border: 1px solid rgba(255, 255, 255, 0.22);
 
       box-shadow:
@@ -226,18 +226,31 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         inset -1.5px -1.5px 3px rgba(0, 0, 0, 0.45);
 
       opacity: 0;
-      transform: translate3d(36px, 0, 0); will-change: transform, opacity;
+      transform: translate3d(36px, 0, 0);
+      will-change: transform, opacity;
       pointer-events: none;
       transition:
-        transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
         background 0.15s ease,
         box-shadow 0.15s ease;
     }
 
+    /* Hit-box tak terlihat 48x48px agar sentuhan jari selalu akurat 100% */
+    .btn-topbar-back::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      bottom: -10px;
+      left: -14px;
+      right: -14px;
+      min-width: 48px;
+      min-height: 48px;
+    }
+
     .btn-topbar-back.revealed {
       opacity: 1;
-      transform: translateX(0);
+      transform: translate3d(0, 0, 0);
       pointer-events: auto;
     }
 
@@ -2512,6 +2525,14 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         min-width: 62px;
         padding: 0 9px;
       }
+      .btn-topbar-back::before {
+        top: -10px;
+        bottom: -10px;
+        left: -12px;
+        right: -12px;
+        min-width: 48px;
+        min-height: 48px;
+      }
       .btn-back-text {
         font-size: 0.65rem;
       }
@@ -2722,33 +2743,33 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     }
 
     /*
-      SMOKED OBSIDIAN ACRYLIC MODE (Low-Spec / 1GB RAM / Komputer Jadul)
-      Menghapus beban multi-pass Gaussian blur backdrop-filter tanpa mengurangi kemewahan UI.
+      SMOKED OBSIDIAN ACRYLIC GLASS (PERMANEN: TAMPILAN MEGAH & ULTRA SMOOTH 60 FPS)
+      Bebas beban blur kalkulasi berat sehingga rendering kartu selalu halus di semua perangkat.
     */
-    .potato-mode .header-card,
-    .potato-mode .deck-card,
-    .potato-mode .drawer-glass-card,
-    .potato-mode .footer-note-card,
-    .potato-mode .github-badge-glass,
-    .potato-mode .about-photo-card,
-    .potato-mode .about-hero-card,
-    .potato-mode .about-story-card,
-    .potato-mode .about-quick-card,
-    .potato-mode .notez-feature-card,
-    .potato-mode .notez-hdr-card,
-    .potato-mode .notez-stat-pill,
-    .potato-mode .notez-bottom-action-card,
-    .potato-mode .topbar-44,
-    .potato-mode .drawer-panel {
+    .header-card,
+    .deck-card,
+    .drawer-glass-card,
+    .footer-note-card,
+    .github-badge-glass,
+    .about-photo-card,
+    .about-hero-card,
+    .about-story-card,
+    .about-quick-card,
+    .notez-feature-card,
+    .notez-hdr-card,
+    .notez-stat-pill,
+    .notez-bottom-action-card,
+    .topbar-44,
+    .drawer-panel {
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
     }
 
-    .potato-mode .deck-card,
-    .potato-mode .about-story-card,
-    .potato-mode .about-quick-card,
-    .potato-mode .about-hero-card,
-    .potato-mode .footer-note-card {
+    .deck-card,
+    .about-story-card,
+    .about-quick-card,
+    .about-hero-card,
+    .footer-note-card {
       background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.03) 100%),
         rgba(10, 14, 22, 0.88) !important;
@@ -2756,113 +2777,16 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.70) !important;
     }
 
-    .potato-mode .header-card {
+    .header-card {
       background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%),
         rgba(12, 17, 26, 0.92) !important;
     }
 
-    .potato-mode .about-photo-card {
+    .about-photo-card {
       background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.05) 100%),
         rgba(12, 17, 26, 0.88) !important;
-    }
-
-    .potato-mode .aurora-blob {
-      display: none !important;
-    }
-
-    /* Drawer Performance Toggle Button */
-    .drawer-perf-toggle-wrap {
-      width: 100%;
-      margin-top: 14px;
-    }
-
-    .drawer-perf-toggle-btn {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 10px 14px;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      color: #f1f5f9;
-      cursor: pointer;
-      user-select: none;
-      -webkit-user-select: none;
-      transition: background 0.2s ease, border-color 0.2s ease;
-    }
-
-    .drawer-perf-toggle-btn:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.28);
-    }
-
-    .perf-toggle-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-align: left;
-    }
-
-    .perf-toggle-icon {
-      width: 16px;
-      height: 16px;
-      color: var(--c-accent-amber);
-      flex-shrink: 0;
-    }
-
-    .perf-toggle-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .perf-toggle-title {
-      font-size: 0.80rem;
-      font-weight: 600;
-      color: #f8fafc;
-      letter-spacing: 0.01em;
-    }
-
-    .perf-toggle-desc {
-      font-size: 0.65rem;
-      color: #94a3b8;
-    }
-
-    .perf-toggle-switch {
-      width: 38px;
-      height: 22px;
-      border-radius: 11px;
-      background: rgba(255, 255, 255, 0.16);
-      border: 1px solid rgba(255, 255, 255, 0.24);
-      position: relative;
-      flex-shrink: 0;
-      transition: background 0.25s ease, border-color 0.25s ease;
-    }
-
-    .perf-switch-thumb {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: #ffffff;
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease;
-    }
-
-    .potato-mode .perf-toggle-switch {
-      background: rgba(245, 158, 11, 0.35);
-      border-color: rgba(245, 158, 11, 0.60);
-    }
-
-    .potato-mode .perf-switch-thumb {
-      transform: translateX(16px);
-      background: var(--c-accent-amber);
     }
   </style>
 </head>
@@ -2959,23 +2883,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         </div>
       </div>
 
-      <!-- TOGGLE MODE 60 FPS ULTRA SMOOTH (ECO MODE) -->
-      <div class="drawer-perf-toggle-wrap">
-        <button class="drawer-perf-toggle-btn" id="btn-perf-toggle" onclick="togglePerformanceMode()" aria-label="Toggle 60 FPS Smooth Mode">
-          <div class="perf-toggle-left">
-            <svg class="perf-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
-            </svg>
-            <div class="perf-toggle-info">
-              <span class="perf-toggle-title">60 FPS Smooth Mode</span>
-              <span class="perf-toggle-desc" id="perf-toggle-status">Auto (GPU Optimized)</span>
-            </div>
-          </div>
-          <div class="perf-toggle-switch" id="perf-toggle-switch">
-            <div class="perf-switch-thumb"></div>
-          </div>
-        </button>
-      </div>
+
     </div>
 
     <div class="drawer-bottom-bar">
@@ -3896,6 +3804,22 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     const aboutStoryCard = document.getElementById("about-story-card");
 
     let activeStage = "cover"; // "cover" | "notez" | "about"
+    let stageTimers = [];
+
+    function clearStageTimers() {
+      stageTimers.forEach(id => clearTimeout(id));
+      stageTimers = [];
+    }
+
+    function addStageTimer(fn, delay) {
+      const id = setTimeout(() => {
+        const idx = stageTimers.indexOf(id);
+        if (idx !== -1) stageTimers.splice(idx, 1);
+        fn();
+      }, delay);
+      stageTimers.push(id);
+      return id;
+    }
 
     // Elemen Leader Stage & Theme Gallery
     const cardLeaderVibes = document.getElementById("card-leader-vibes");
@@ -4012,58 +3936,16 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       });
     }
 
-    // DETEKSI OTOMATIS HP KENTANG (RAM <= 2GB ATAU CPU <= 4 CORE)
-    function initPerformanceMode() {
-      const stored = localStorage.getItem("moezaq_perf_mode");
-      const statusText = document.getElementById("perf-toggle-status");
-
-      let isLite = false;
-      if (stored !== null) {
-        isLite = stored === "true";
-      } else {
-        const memory = navigator.deviceMemory;
-        const cores = navigator.hardwareConcurrency;
-        const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        // Jika RAM <= 2GB atau CPU thread <= 4 atau prefers-reduced-motion
-        if ((memory && memory <= 2) || (cores && cores <= 4) || prefersReduced) {
-          isLite = true;
-        }
-      }
-
-      if (isLite) {
-        document.documentElement.classList.add("potato-mode");
-        if (statusText) statusText.textContent = "Aktif (60 FPS Smooth)";
-      } else {
-        document.documentElement.classList.remove("potato-mode");
-        if (statusText) statusText.textContent = "Mati (Full Glass Blur)";
-      }
-    }
-
-    function togglePerformanceMode() {
-      const isCurrentlyPotato = document.documentElement.classList.contains("potato-mode");
-      const statusText = document.getElementById("perf-toggle-status");
-
-      if (isCurrentlyPotato) {
-        document.documentElement.classList.remove("potato-mode");
-        localStorage.setItem("moezaq_perf_mode", "false");
-        if (statusText) statusText.textContent = "Mati (Full Glass Blur)";
-      } else {
-        document.documentElement.classList.add("potato-mode");
-        localStorage.setItem("moezaq_perf_mode", "true");
-        if (statusText) statusText.textContent = "Aktif (60 FPS Smooth)";
-      }
-
-      if (navigator.vibrate) navigator.vibrate(10);
-    }
-
-    // Jalankan deteksi instan
-    initPerformanceMode();
     window.addEventListener("DOMContentLoaded", () => {
-      initPerformanceMode();
       startChoreography();
       setupTactileFeedback();
       setupCarouselDots();
       setupQuickCardsAccordion();
+
+      // Bind responsif instan untuk tombol Back (pointerup mencegah delay 300ms mobile)
+      btnBackEl.addEventListener("pointerup", (e) => {
+        handleBackToCover(e);
+      });
     });
 
     // KOREOGRAFI PULANG SAMPUL & MEMBUKA PANGGUNG NOTEZ
@@ -4118,6 +4000,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         headerEl.classList.remove("hdr-anim-active");
 
         btnBackEl.classList.add("revealed");
+        isTransitioning = false; // Tombol Back langsung responsif seketika!
 
         notezStageZone.classList.add("is-active");
         notezHeaderCard.classList.remove("exiting");
@@ -4130,25 +4013,24 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         updateActiveDot(0);
 
         // 1. Card Atas NOTEZ meluncur turun (Slide to Down)
-        setTimeout(() => {
+        addStageTimer(() => {
           notezHeaderCard.classList.add("revealed");
 
           // 2. Garis pembatas horizontal atas membentang mekar
-          setTimeout(() => {
+          addStageTimer(() => {
             notezDividerTop.classList.add("revealed");
 
             // 3. BAGIAN TENGAH: Track 6 Fitur meluncur masuk (SLIDE TO LEFT SMOOTHLY)
-            setTimeout(() => {
+            addStageTimer(() => {
               notezCarouselWrap.classList.add("revealed");
 
               // 4. Garis pembatas bawah Bagian Tengah membentang mekar
-              setTimeout(() => {
+              addStageTimer(() => {
                 notezDividerCenter.classList.add("revealed");
 
                 // 5. BAGIAN BAWAH: Action Download APK, Manifesto & Badges Specs meluncur naik
-                setTimeout(() => {
+                addStageTimer(() => {
                   notezBottomZone.classList.add("revealed");
-                  isTransitioning = false;
                 }, 280);
 
               }, 380);
@@ -4215,6 +4097,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         headerEl.classList.remove("hdr-anim-active");
 
         btnBackEl.classList.add("revealed");
+        isTransitioning = false; // Tombol Back langsung responsif seketika!
 
         aboutStageZone.classList.add("is-active");
         aboutPhotoCard.classList.remove("exiting");
@@ -4228,29 +4111,26 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         });
 
         // 1. KARTU FOTO (TOP-LEFT): MUNCUL DENGAN FADED ZOOM OUT
-        setTimeout(() => {
+        addStageTimer(() => {
           aboutPhotoCard.classList.add("revealed");
 
           // 2. JEDA 0.7S: HERO CARD MELUNCUR MASUK (SLIDE TO LEFT MENDEKATI KARTU FOTO)
-          setTimeout(() => {
+          addStageTimer(() => {
             aboutHeroCard.classList.add("revealed");
 
             // 3. GARIS HORIZONTAL PEMBATAS MEKAR DI BAWAHNYA
-            setTimeout(() => {
+            addStageTimer(() => {
               aboutDividerTop.classList.add("revealed");
 
               // 4. JEDA 0.5S: STORY CARD MUNCUL (SLIDE TO LEFT)
-              setTimeout(() => {
+              addStageTimer(() => {
                 aboutStoryCard.classList.add("revealed");
 
-                // 5. SETELAH SEMUA MUNCUL, JEDA 0.8S: 6 QUICK CARDS (1 BARIS) MUNCUL (SLIDE TO RIGHT BERGANTIAN)
-                setTimeout(() => {
+                // 5. SETELAH SEMUA MUNCUL, JEDA 0.8S: 5 QUICK CARDS MUNCUL (SLIDE TO RIGHT BERGANTIAN)
+                addStageTimer(() => {
                   quickCards.forEach((card, idx) => {
-                    setTimeout(() => {
+                    addStageTimer(() => {
                       card.classList.add("revealed");
-                      if (idx === quickCards.length - 1) {
-                        isTransitioning = false;
-                      }
                     }, idx * 110);
                   });
                 }, 800);
@@ -4266,12 +4146,20 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       }, 1380 + 580 + 500);
     }
 
-    // SAAT TOMBOL BACK DI-TAP: KEMBALI KE SAMPUL UTAMA (PELAN & ANGGUN)
+    // SAAT TOMBOL BACK DI-TAP: KEMBALI KE SAMPUL UTAMA (RESPON INSTAN 1-TAP)
     function handleBackToCover(e) {
-      if (isTransitioning) return;
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      if (activeStage === "cover" || isTransitioning) return;
       isTransitioning = true;
 
-      if (navigator.vibrate) navigator.vibrate(10);
+      // Batalkan semua timer spawn yang masih berjalan agar tidak tumpang tindih
+      clearStageTimers();
+
+      if (navigator.vibrate) navigator.vibrate(12);
 
       btnBackEl.classList.remove("revealed");
 
