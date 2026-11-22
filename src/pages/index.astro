@@ -607,120 +607,54 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       50% { transform: translateY(-4px); }
     }
 
-    /* Header: Unboxed Commissions Open (Expandable dengan Garis Horizontal) */
-    .drawer-comm-section {
+    /* Tavern Quest & Commissions Board dengan Sentuhan Vignette Elegan */
+    .drawer-board-card {
+      position: relative;
       width: 100%;
       margin-top: 14px;
-      position: relative;
-      z-index: 2;
-      flex-shrink: 0;
-    }
-
-    .drawer-comm-header {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 6px 0 10px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-      cursor: pointer;
-      user-select: none;
-      -webkit-user-select: none;
-      position: relative;
-      touch-action: manipulation;
-      transition: border-color 0.2s ease, opacity 0.15s ease;
-    }
-
-    .drawer-comm-header:hover {
-      border-color: rgba(229, 179, 66, 0.40);
-    }
-
-    .drawer-comm-header:active {
-      opacity: 0.75;
-      transform: scale(0.99);
-    }
-
-    .drawer-comm-title {
-      font-family: var(--font-sans);
-      font-size: 0.76rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: #ffffff;
-      transition: color 0.18s ease;
-    }
-
-    .drawer-comm-header:hover .drawer-comm-title,
-    .drawer-comm-section.is-expanded .drawer-comm-title {
-      color: var(--c-accent-amber);
-    }
-
-    .drawer-comm-section.is-expanded .drawer-comm-header {
-      border-color: rgba(229, 179, 66, 0.35);
-    }
-
-    .drawer-comm-body {
-      max-height: 0;
-      opacity: 0;
+      border-radius: 12px;
       overflow: hidden;
+      background: #05070a;
+      border: 1px solid rgba(229, 179, 66, 0.24);
+      box-shadow:
+        0 10px 28px -6px rgba(0, 0, 0, 0.85),
+        0 0 16px rgba(229, 179, 66, 0.10),
+        inset 1px 1px 1.5px rgba(255, 255, 255, 0.15);
+      flex-shrink: 0;
+      z-index: 2;
       transition:
-        max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.28s ease;
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease;
     }
 
-    .drawer-comm-section.is-expanded .drawer-comm-body {
-      max-height: 320px;
-      opacity: 1;
+    .drawer-board-card:hover {
+      border-color: rgba(229, 179, 66, 0.45);
+      box-shadow:
+        0 14px 34px -6px rgba(0, 0, 0, 0.90),
+        0 0 22px rgba(229, 179, 66, 0.18);
+      transform: translateY(-1px);
     }
 
-    .drawer-comm-body-inner {
-      padding: 10px 0 4px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
+    .drawer-board-img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 720 / 480;
+      display: block;
+      object-fit: cover;
     }
 
-    .drawer-comm-item {
-      display: flex;
-      align-items: baseline;
-      padding: 3.5px 0;
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
-    }
-
-    .drawer-comm-item:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .comm-text {
-      font-family: var(--font-sans);
-      font-size: 0.72rem;
-      font-weight: 500;
-      color: #f1f5f9;
-      line-height: 1.45;
-      flex: 1;
-      word-break: normal;
-      overflow-wrap: normal;
-    }
-
-    .comm-highlight {
-      display: inline;
-      font-weight: 700;
-    }
-
-    .comm-pipe {
-      color: rgba(255, 255, 255, 0.35);
-      font-weight: 400;
-      margin: 0 4px;
-      display: inline;
-    }
-
-    .comm-yellow {
-      color: #facc15;
-      text-shadow: 0 0 8px rgba(250, 204, 21, 0.40);
-    }
-
-    .comm-red {
-      color: #ef4444;
-      text-shadow: 0 0 8px rgba(239, 68, 68, 0.45);
+    /* Vignette Overlay: Menghitamkan tepian gambar dengan gradasi radial & linear lembut */
+    .drawer-board-vignette {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: 12px;
+      background:
+        radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(5, 7, 10, 0.45) 72%, rgba(5, 7, 10, 0.88) 100%),
+        linear-gradient(to top, rgba(5, 7, 10, 0.50) 0%, transparent 25%),
+        linear-gradient(to bottom, rgba(5, 7, 10, 0.35) 0%, transparent 20%);
+      box-shadow: inset 0 0 20px 4px rgba(5, 7, 10, 0.75);
     }
 
     /* Footer Comms Bar di Bawah Drawer */
@@ -785,18 +719,12 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     }
 
     @media (max-width: 480px) {
-      .drawer-comm-header {
-        padding: 5px 0 9px 0;
+      .drawer-board-card {
+        margin-top: 12px;
+        border-radius: 10px;
       }
-      .drawer-comm-title {
-        font-size: 0.72rem;
-      }
-      .drawer-comm-body-inner {
-        padding: 8px 0 4px 0;
-        gap: 6px;
-      }
-      .comm-text {
-        font-size: 0.68rem;
+      .drawer-board-vignette {
+        border-radius: 10px;
       }
       .drawer-comm-btn {
         height: 32px;
@@ -3306,7 +3234,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
     <div class="drawer-top-bar">
       <div class="drawer-brand">
-        <span>EXPLORE</span>
+        <span>HALL OF VOID</span>
       </div>
       <button
         class="btn-drawer-close"
@@ -3320,43 +3248,21 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       </button>
     </div>
 
-    <!-- Header: Unboxed Commissions Open (Expandable dengan Garis Horizontal) -->
-    <div
-      class="drawer-comm-section"
-      id="drawer-comm-card"
-      role="button"
-      tabindex="0"
-      aria-expanded="false"
-      aria-label="Commissions Open Services"
-    >
-      <div class="drawer-comm-header">
-        <span class="drawer-comm-title">Commissions Open</span>
-      </div>
-      <div class="drawer-comm-body" id="drawer-comm-card-body">
-        <div class="drawer-comm-body-inner">
-          <div class="drawer-comm-item">
-            <span class="comm-text">Image &amp; Video Editing</span>
-          </div>
-          <div class="drawer-comm-item">
-            <span class="comm-text">Landing Page Design &amp; Development</span>
-          </div>
-          <div class="drawer-comm-item">
-            <span class="comm-text">
-              Mobile App Development
-              <span class="comm-highlight comm-yellow"><span class="comm-sep">|</span> Rigorous Testing</span>
-            </span>
-          </div>
-          <div class="drawer-comm-item">
-            <span class="comm-text">Device &amp; Software Services</span>
-          </div>
-          <div class="drawer-comm-item">
-            <span class="comm-text">
-              Dashboard Login Development
-              <span class="comm-highlight comm-red"><span class="comm-sep">|</span> Fortifying The Gates</span>
-            </span>
-          </div>
-        </div>
-      </div>
+    <!-- Tavern Quest & Commissions Board dengan Sentuhan Vignette Elegan -->
+    <div class="drawer-board-card" id="drawer-board-card">
+      <picture>
+        <source srcset={`${baseUrl}/assets/comms_board.webp`} type="image/webp">
+        <img
+          src={`${baseUrl}/assets/comms_board.jpg`}
+          alt="Commissions Open - Tavern Quest Board"
+          class="drawer-board-img"
+          loading="lazy"
+          decoding="async"
+          width="720"
+          height="480"
+        />
+      </picture>
+      <div class="drawer-board-vignette" aria-hidden="true"></div>
     </div>
 
     <!-- Sisa Ruang Tengah Drawer: Kosong bersih untuk ide absurd -->
@@ -3773,41 +3679,6 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       });
     }
 
-    // DRAWER COMMISSIONS ACCORDION TOGGLE
-    function setupDrawerCommissionsAccordion() {
-      const commCard = document.getElementById("drawer-comm-card");
-      if (!commCard) return;
-
-      commCard.addEventListener("click", (e) => {
-        // If clicking inside the body text or an anchor link, don't collapse
-        if (e.target.closest(".drawer-comm-body") || e.target.closest("a")) return;
-        const isExpanded = commCard.classList.contains("is-expanded");
-        if (isExpanded) {
-          commCard.classList.remove("is-expanded");
-          commCard.setAttribute("aria-expanded", "false");
-        } else {
-          commCard.classList.add("is-expanded");
-          commCard.setAttribute("aria-expanded", "true");
-        }
-        if (navigator.vibrate) navigator.vibrate(8);
-      });
-
-      commCard.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          const isExpanded = commCard.classList.contains("is-expanded");
-          if (isExpanded) {
-            commCard.classList.remove("is-expanded");
-            commCard.setAttribute("aria-expanded", "false");
-          } else {
-            commCard.classList.add("is-expanded");
-            commCard.setAttribute("aria-expanded", "true");
-          }
-          if (navigator.vibrate) navigator.vibrate(8);
-        }
-      });
-    }
-
     // DRAWER PANEL TOGGLE (0ms pointerdown)
     function toggleDrawer(open) {
       if (open) {
@@ -3825,7 +3696,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
     // TACTILE FEEDBACK PADA ELEMEN INTERAKTIF
     function setupTactileFeedback() {
-      const interactiveEls = document.querySelectorAll(".btn-topbar-panel, .story-link-item, .about-quick-card, .drawer-comm-header, .drawer-comm-btn, .btn-drawer-close");
+      const interactiveEls = document.querySelectorAll(".btn-topbar-panel, .story-link-item, .about-quick-card, .drawer-comm-btn, .btn-drawer-close");
       interactiveEls.forEach(card => {
         const pressOn = () => card.classList.add("is-pressed");
         const pressOff = () => setTimeout(() => card.classList.remove("is-pressed"), 80);
@@ -3840,7 +3711,6 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     window.addEventListener("DOMContentLoaded", () => {
       runPortfolioSpawn();
       setupQuickCardsAccordion();
-      setupDrawerCommissionsAccordion();
       setupTactileFeedback();
 
       const btnPanel = document.getElementById("btn-topbar-panel");
