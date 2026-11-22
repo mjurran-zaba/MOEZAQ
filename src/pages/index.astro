@@ -1990,138 +1990,10 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       pointer-events: none !important;
     }
 
-    /* Bar Mini Browser */
-    .mini-browser-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      width: 100%;
-      flex-shrink: 0;
-      padding: 6px 10px;
-      border-radius: 12px;
-      background: rgba(14, 20, 30, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
-    }
-
-    .browser-bar-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      min-width: 0;
-      flex: 1;
-    }
-
-    .btn-browser-back {
-      height: 28px;
-      padding: 0 10px;
-      border-radius: 7px;
-      border: 1px solid rgba(229, 179, 66, 0.40);
-      background: rgba(229, 179, 66, 0.15);
-      color: #fef08a;
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      cursor: pointer;
-      user-select: none;
-      -webkit-user-select: none;
-      flex-shrink: 0;
-      transition:
-        background 0.14s ease,
-        transform 0.14s ease,
-        border-color 0.14s ease;
-    }
-
-    .btn-browser-back svg {
-      width: 14px;
-      height: 14px;
-    }
-
-    .btn-browser-back:hover {
-      background: rgba(229, 179, 66, 0.25);
-      border-color: rgba(229, 179, 66, 0.65);
-      transform: translateY(-1px);
-    }
-
-    .btn-browser-back:active {
-      transform: scale(0.94);
-    }
-
-    .browser-url-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 3px 9px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.50);
-      border: 1px solid rgba(255, 255, 255, 0.10);
-      color: var(--c-text-muted);
-      font-family: var(--font-mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.02em;
-      min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .browser-lock-icon {
-      width: 11px;
-      height: 11px;
-      color: var(--c-accent-emerald);
-      flex-shrink: 0;
-    }
-
-    .browser-url-text {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .browser-bar-right {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-shrink: 0;
-    }
-
-    .btn-browser-external {
-      width: 28px;
-      height: 28px;
-      border-radius: 7px;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      background: rgba(255, 255, 255, 0.06);
-      color: #cbd5e1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      cursor: pointer;
-      transition:
-        background 0.14s ease,
-        color 0.14s ease,
-        transform 0.14s ease;
-    }
-
-    .btn-browser-external svg {
-      width: 13px;
-      height: 13px;
-    }
-
-    .btn-browser-external:hover {
-      background: rgba(255, 255, 255, 0.16);
-      color: #ffffff;
-      transform: translateY(-1px);
-    }
-
-    /* Viewport Frame Iframe */
+    /* Viewport Frame Iframe Bersih */
     .mini-browser-viewport {
       width: 100%;
+      height: 100%;
       flex: 1 1 auto;
       min-height: 0;
       position: relative;
@@ -2181,41 +2053,25 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       to { transform: rotate(360deg); }
     }
 
-    /* Interactive Clickable Project Item */
-    .quick-project-clickable {
+    /* Clean Hyperlink Button for Project */
+    .project-link-underline {
+      color: #f1f5f9;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1.5px;
+      text-decoration-color: var(--c-accent-amber);
       cursor: pointer;
-      position: relative;
-      transition: background 0.15s ease, transform 0.15s ease;
-      border-radius: 6px;
-      padding: 4px 6px !important;
-      margin: 0 -6px;
+      display: inline-block;
+      transition: color 0.15s ease, text-decoration-color 0.15s ease, opacity 0.15s ease;
     }
 
-    .quick-project-clickable:hover {
-      background: rgba(229, 179, 66, 0.14);
-      transform: translateX(2px);
+    .project-link-underline:hover {
+      color: #ffffff;
+      text-decoration-color: #ffffff;
     }
 
-    .quick-project-clickable:active {
-      transform: scale(0.97);
-    }
-
-    .project-link-highlight {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .project-view-badge {
-      font-family: var(--font-mono);
-      font-size: 0.54rem;
-      font-weight: 700;
-      color: var(--c-accent-amber);
-      background: rgba(245, 158, 11, 0.16);
-      border: 1px solid rgba(245, 158, 11, 0.35);
-      padding: 1px 5px;
-      border-radius: 4px;
-      letter-spacing: 0.04em;
+    .project-link-underline:active {
+      opacity: 0.65;
     }
 
     /* Kolom Kiri: 5 Card 1 Baris (Expand to Down saat di-tap) */
@@ -3642,10 +3498,9 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
             </div>
             <div class="quick-card-body">
               <div class="quick-card-body-inner">
-                <div class="quick-pipe-item quick-project-clickable" id="item-project-notez" role="button" tabindex="0" title="Buka NOTEZ (Live Sub-Stage)" aria-label="Buka NOTEZ Landing Page">
-                  <span class="pipe-left project-link-highlight">
-                    <span>NOTEZ</span>
-                    <span class="project-view-badge">OPEN ↗</span>
+                <div class="quick-pipe-item">
+                  <span class="pipe-left">
+                    <span class="project-link-underline" id="item-project-notez" role="button" tabindex="0" title="Buka NOTEZ" aria-label="Buka NOTEZ">NOTEZ</span>
                   </span>
                   <span class="pipe-sep">|</span>
                   <span class="pipe-right"><code class="pipe-code">v0.2.0</code></span>
@@ -3720,39 +3575,10 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
       </div>
 
-      <!-- 4. PANGGUNG MINI BROWSER NOTEZ (SUB-STAGE EMBEDDED VIEWPORT) -->
+      <!-- 4. PANGGUNG EMBEDDED NOTEZ (SUB-STAGE VIEWPORT MURNI) -->
       <div class="notez-browser-stage" id="notez-browser-stage">
         
-        <!-- Bar Mini Browser: Kontrol navigasi & URL indicator -->
-        <div class="mini-browser-bar">
-          <div class="browser-bar-left">
-            <button class="btn-browser-back" id="btn-close-notez" onclick="closeNotezStage(true)" aria-label="Kembali ke Player Stats" title="Kembali ke Profil">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-              </svg>
-              <span>STATS</span>
-            </button>
-            <div class="browser-url-pill">
-              <svg class="browser-lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-              </svg>
-              <span class="browser-url-text">mjurran-zaba.github.io/NOTEZ</span>
-            </div>
-          </div>
-
-          <div class="browser-bar-right">
-            <a href="https://mjurran-zaba.github.io/NOTEZ/" target="_blank" rel="noopener noreferrer" class="btn-browser-external" title="Buka Penuh di Tab Baru" aria-label="Buka Penuh di Tab Baru">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Frame Viewport Mini Browser (Iframe Live ke NOTEZ) -->
+        <!-- Frame Viewport Bersih (Iframe Live ke NOTEZ) -->
         <div class="mini-browser-viewport" id="mini-browser-viewport">
           <div class="browser-loader" id="browser-loader">
             <div class="browser-spinner"></div>
@@ -4025,8 +3851,12 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     });
 
     window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && drawerPanel.classList.contains("open")) {
-        toggleDrawer(false);
+      if (e.key === "Escape") {
+        if (drawerPanel && drawerPanel.classList.contains("open")) {
+          toggleDrawer(false);
+        } else if (notezBrowserStage && notezBrowserStage.style.display === "flex") {
+          closeNotezStage(true);
+        }
       }
     });
   </script>
