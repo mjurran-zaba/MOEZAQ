@@ -532,15 +532,6 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       color: #ffffff;
       display: flex;
       align-items: center;
-      gap: 8px;
-    }
-
-    .drawer-brand-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--c-accent-amber);
-      box-shadow: 0 0 8px var(--c-accent-amber);
     }
 
     .btn-drawer-close {
@@ -616,106 +607,57 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       50% { transform: translateY(-4px); }
     }
 
-    /* Header: Card 1 Baris Kolom (Commissions Open - Expandable) */
-    .drawer-comm-card {
+    /* Header: Unboxed Commissions Open (Expandable dengan Garis Horizontal) */
+    .drawer-comm-section {
       width: 100%;
-      margin-top: 12px;
-      border-radius: 12px;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%),
-        rgba(16, 22, 32, 0.70);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      box-shadow:
-        0 4px 14px -2px rgba(0, 0, 0, 0.45),
-        inset 1px 1px 1px rgba(255, 255, 255, 0.18);
+      margin-top: 14px;
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    .drawer-comm-header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 6px 0 10px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       cursor: pointer;
       user-select: none;
       -webkit-user-select: none;
       position: relative;
-      z-index: 2;
-      overflow: hidden;
-      flex-shrink: 0;
-      transition:
-        border-color 0.22s ease,
-        background 0.22s ease,
-        box-shadow 0.22s ease,
-        transform 0.14s ease;
       touch-action: manipulation;
+      transition: border-color 0.2s ease, opacity 0.15s ease;
     }
 
-    .drawer-comm-card:hover {
-      border-color: rgba(229, 179, 66, 0.45);
-      box-shadow:
-        0 6px 18px -2px rgba(0, 0, 0, 0.55),
-        0 0 10px rgba(229, 179, 66, 0.15);
+    .drawer-comm-header:hover {
+      border-color: rgba(229, 179, 66, 0.40);
     }
 
-    .drawer-comm-card.is-pressed {
-      transform: scale(0.985);
+    .drawer-comm-header:active {
+      opacity: 0.75;
+      transform: scale(0.99);
     }
 
-    .drawer-comm-card-header {
-      height: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 12px;
-    }
-
-    .drawer-comm-title-wrap {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .drawer-comm-status-dot {
-      width: 6.5px;
-      height: 6.5px;
-      border-radius: 50%;
-      background: #10b981;
-      box-shadow: 0 0 7px #10b981;
-      flex-shrink: 0;
-      animation: pulseCommDot 2.2s ease-in-out infinite;
-    }
-
-    @keyframes pulseCommDot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.85); }
-    }
-
-    .drawer-comm-card-title {
+    .drawer-comm-title {
       font-family: var(--font-sans);
       font-size: 0.76rem;
       font-weight: 700;
       letter-spacing: 0.04em;
       color: #ffffff;
+      transition: color 0.18s ease;
     }
 
-    .drawer-comm-chevron {
-      width: 14px;
-      height: 14px;
+    .drawer-comm-header:hover .drawer-comm-title,
+    .drawer-comm-section.is-expanded .drawer-comm-title {
       color: var(--c-accent-amber);
-      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-      flex-shrink: 0;
     }
 
-    .drawer-comm-card.is-expanded {
-      border-color: rgba(229, 179, 66, 0.40);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%),
-        rgba(16, 22, 32, 0.88);
-      box-shadow:
-        0 8px 24px -4px rgba(0, 0, 0, 0.65),
-        0 0 12px rgba(229, 179, 66, 0.12);
+    .drawer-comm-section.is-expanded .drawer-comm-header {
+      border-color: rgba(229, 179, 66, 0.35);
     }
 
-    .drawer-comm-card.is-expanded .drawer-comm-chevron {
-      transform: rotate(180deg);
-    }
-
-    .drawer-comm-card-body {
+    .drawer-comm-body {
       max-height: 0;
       opacity: 0;
       overflow: hidden;
@@ -724,14 +666,13 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         opacity 0.28s ease;
     }
 
-    .drawer-comm-card.is-expanded .drawer-comm-card-body {
+    .drawer-comm-section.is-expanded .drawer-comm-body {
       max-height: 320px;
       opacity: 1;
     }
 
-    .drawer-comm-card-body-inner {
-      padding: 6px 12px 12px 12px;
-      border-top: 1px dashed rgba(255, 255, 255, 0.12);
+    .drawer-comm-body-inner {
+      padding: 10px 0 4px 0;
       display: flex;
       flex-direction: column;
       gap: 7px;
@@ -740,9 +681,8 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     .drawer-comm-item {
       display: flex;
       align-items: baseline;
-      gap: 7px;
-      padding: 4px 0;
-      border-bottom: 1px dashed rgba(255, 255, 255, 0.07);
+      padding: 3.5px 0;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
     }
 
     .drawer-comm-item:last-child {
@@ -750,19 +690,12 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       padding-bottom: 0;
     }
 
-    .comm-bullet {
-      font-size: 0.58rem;
-      color: var(--c-accent-amber);
-      flex-shrink: 0;
-      line-height: 1;
-      transform: translateY(-1px);
-    }
-
     .comm-text {
+      font-family: var(--font-sans);
       font-size: 0.72rem;
       font-weight: 500;
       color: #f1f5f9;
-      line-height: 1.4;
+      line-height: 1.45;
       flex: 1;
       word-break: normal;
       overflow-wrap: normal;
@@ -852,19 +785,14 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     }
 
     @media (max-width: 480px) {
-      .drawer-comm-card-header {
-        height: 35px;
-        padding: 0 10px;
+      .drawer-comm-header {
+        padding: 5px 0 9px 0;
       }
-      .drawer-comm-card-title {
+      .drawer-comm-title {
         font-size: 0.72rem;
       }
-      .drawer-comm-chevron {
-        width: 12px;
-        height: 12px;
-      }
-      .drawer-comm-card-body-inner {
-        padding: 5px 10px 10px 10px;
+      .drawer-comm-body-inner {
+        padding: 8px 0 4px 0;
         gap: 6px;
       }
       .comm-text {
@@ -3378,7 +3306,6 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
     <div class="drawer-top-bar">
       <div class="drawer-brand">
-        <span class="drawer-brand-dot"></span>
         <span>EXPLORE</span>
       </div>
       <button
@@ -3393,47 +3320,36 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       </button>
     </div>
 
-    <!-- Header: Card 1 Baris Kolom (Commissions Open - Expandable) -->
+    <!-- Header: Unboxed Commissions Open (Expandable dengan Garis Horizontal) -->
     <div
-      class="drawer-comm-card"
+      class="drawer-comm-section"
       id="drawer-comm-card"
       role="button"
       tabindex="0"
       aria-expanded="false"
       aria-label="Commissions Open Services"
     >
-      <div class="drawer-comm-card-header">
-        <div class="drawer-comm-title-wrap">
-          <span class="drawer-comm-status-dot" aria-hidden="true"></span>
-          <span class="drawer-comm-card-title">Commissions Open</span>
-        </div>
-        <svg class="drawer-comm-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
+      <div class="drawer-comm-header">
+        <span class="drawer-comm-title">Commissions Open</span>
       </div>
-      <div class="drawer-comm-card-body" id="drawer-comm-card-body">
-        <div class="drawer-comm-card-body-inner">
+      <div class="drawer-comm-body" id="drawer-comm-card-body">
+        <div class="drawer-comm-body-inner">
           <div class="drawer-comm-item">
-            <span class="comm-bullet">✦</span>
             <span class="comm-text">Image &amp; Video Editing</span>
           </div>
           <div class="drawer-comm-item">
-            <span class="comm-bullet">✦</span>
             <span class="comm-text">Landing Page Design &amp; Development</span>
           </div>
           <div class="drawer-comm-item">
-            <span class="comm-bullet">✦</span>
             <span class="comm-text">
               Mobile App Development
               <span class="comm-highlight comm-yellow"><span class="comm-sep">|</span> Rigorous Testing</span>
             </span>
           </div>
           <div class="drawer-comm-item">
-            <span class="comm-bullet">✦</span>
             <span class="comm-text">Device &amp; Software Services</span>
           </div>
           <div class="drawer-comm-item">
-            <span class="comm-bullet">✦</span>
             <span class="comm-text">
               Dashboard Login Development
               <span class="comm-highlight comm-red"><span class="comm-sep">|</span> Fortifying The Gates</span>
@@ -3863,7 +3779,8 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       if (!commCard) return;
 
       commCard.addEventListener("click", (e) => {
-        if (e.target.closest("a")) return;
+        // If clicking inside the body text or an anchor link, don't collapse
+        if (e.target.closest(".drawer-comm-body") || e.target.closest("a")) return;
         const isExpanded = commCard.classList.contains("is-expanded");
         if (isExpanded) {
           commCard.classList.remove("is-expanded");
@@ -3878,7 +3795,15 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       commCard.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          commCard.click();
+          const isExpanded = commCard.classList.contains("is-expanded");
+          if (isExpanded) {
+            commCard.classList.remove("is-expanded");
+            commCard.setAttribute("aria-expanded", "false");
+          } else {
+            commCard.classList.add("is-expanded");
+            commCard.setAttribute("aria-expanded", "true");
+          }
+          if (navigator.vibrate) navigator.vibrate(8);
         }
       });
     }
@@ -3900,7 +3825,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
     // TACTILE FEEDBACK PADA ELEMEN INTERAKTIF
     function setupTactileFeedback() {
-      const interactiveEls = document.querySelectorAll(".btn-topbar-panel, .story-link-item, .about-quick-card, .drawer-comm-card, .drawer-comm-btn, .btn-drawer-close");
+      const interactiveEls = document.querySelectorAll(".btn-topbar-panel, .story-link-item, .about-quick-card, .drawer-comm-header, .drawer-comm-btn, .btn-drawer-close");
       interactiveEls.forEach(card => {
         const pressOn = () => card.classList.add("is-pressed");
         const pressOff = () => setTimeout(() => card.classList.remove("is-pressed"), 80);
