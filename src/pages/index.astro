@@ -226,7 +226,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         inset -1.5px -1.5px 3px rgba(0, 0, 0, 0.45);
 
       opacity: 0;
-      transform: translateX(36px);
+      transform: translate3d(36px, 0, 0); will-change: transform, opacity;
       pointer-events: none;
       transition:
         transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
@@ -323,6 +323,12 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
     .drawer-panel.open {
       transform: translateX(0);
+    }
+
+    /* Optimasi Kinerja: Hentikan total animasi aurora dan floating saat drawer tertutup */
+    .drawer-panel:not(.open) .aurora-blob,
+    .drawer-panel:not(.open) .drawer-glass-card {
+      animation-play-state: paused !important;
     }
 
     .drawer-aurora-canvas {
@@ -805,7 +811,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       width: 100%;
       padding: 15px 20px;
       opacity: 0;
-      transform: translateX(-36px);
+      transform: translate3d(-36px, 0, 0); will-change: transform, opacity;
       transition:
         opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
         transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
@@ -814,12 +820,12 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
     #card-about.revealed {
       opacity: 1;
-      transform: translateX(0);
+      transform: translate3d(0, 0, 0);
     }
 
     #card-about.exiting {
       opacity: 0 !important;
-      transform: translateX(-56px) !important;
+      transform: translate3d(-56px, 0, 0) !important;
       transition:
         opacity 0.58s cubic-bezier(0.16, 1, 0.3, 1),
         transform 0.58s cubic-bezier(0.16, 1, 0.3, 1) !important;
@@ -1760,7 +1766,8 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
       /* Spawn Logic: Slide to Left */
       opacity: 0;
-      transform: translateX(48px);
+      transform: translate3d(48px, 0, 0);
+      will-change: transform, opacity;
       transition:
         opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
         transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1768,12 +1775,12 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
     .about-hero-card.revealed {
       opacity: 1;
-      transform: translateX(0);
+      transform: translate3d(0, 0, 0);
     }
 
     .about-hero-card.exiting {
       opacity: 0 !important;
-      transform: translateX(48px) !important;
+      transform: translate3d(48px, 0, 0) !important;
       transition:
         opacity 0.58s cubic-bezier(0.16, 1, 0.3, 1),
         transform 0.58s cubic-bezier(0.16, 1, 0.3, 1) !important;
@@ -1853,7 +1860,8 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
       /* Spawn Logic: Smooth Slide to Right */
       opacity: 0;
-      transform: translateX(-40px);
+      transform: translate3d(-40px, 0, 0);
+      will-change: transform, opacity;
       transition:
         opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
         transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
@@ -1866,12 +1874,12 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
     .about-quick-card.revealed {
       opacity: 1;
-      transform: translateX(0);
+      transform: translate3d(0, 0, 0);
     }
 
     .about-quick-card.exiting {
       opacity: 0 !important;
-      transform: translateX(-48px) !important;
+      transform: translate3d(-48px, 0, 0) !important;
       transition:
         opacity 0.42s ease,
         transform 0.42s cubic-bezier(0.16, 1, 0.3, 1) !important;
@@ -2070,7 +2078,8 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
       /* Spawn Logic: Slide to Left */
       opacity: 0;
-      transform: translateX(48px);
+      transform: translate3d(48px, 0, 0);
+      will-change: transform, opacity;
       transition:
         opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
         transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
@@ -2082,12 +2091,12 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
     .about-story-card.revealed {
       opacity: 1;
-      transform: translateX(0);
+      transform: translate3d(0, 0, 0);
     }
 
     .about-story-card.exiting {
       opacity: 0 !important;
-      transform: translateX(48px) !important;
+      transform: translate3d(48px, 0, 0) !important;
       transition:
         opacity 0.58s cubic-bezier(0.16, 1, 0.3, 1),
         transform 0.58s cubic-bezier(0.16, 1, 0.3, 1) !important;
@@ -2711,13 +2720,160 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         font-size: 0.62rem;
       }
     }
+
+    /*
+      SMOKED OBSIDIAN ACRYLIC MODE (Low-Spec / 1GB RAM / Komputer Jadul)
+      Menghapus beban multi-pass Gaussian blur backdrop-filter tanpa mengurangi kemewahan UI.
+    */
+    .potato-mode .header-card,
+    .potato-mode .deck-card,
+    .potato-mode .drawer-glass-card,
+    .potato-mode .footer-note-card,
+    .potato-mode .github-badge-glass,
+    .potato-mode .about-photo-card,
+    .potato-mode .about-hero-card,
+    .potato-mode .about-story-card,
+    .potato-mode .about-quick-card,
+    .potato-mode .notez-feature-card,
+    .potato-mode .notez-hdr-card,
+    .potato-mode .notez-stat-pill,
+    .potato-mode .notez-bottom-action-card,
+    .potato-mode .topbar-44,
+    .potato-mode .drawer-panel {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    .potato-mode .deck-card,
+    .potato-mode .about-story-card,
+    .potato-mode .about-quick-card,
+    .potato-mode .about-hero-card,
+    .potato-mode .footer-note-card {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.03) 100%),
+        rgba(10, 14, 22, 0.88) !important;
+      border-color: rgba(255, 255, 255, 0.22) !important;
+      box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.70) !important;
+    }
+
+    .potato-mode .header-card {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.04) 100%),
+        rgba(12, 17, 26, 0.92) !important;
+    }
+
+    .potato-mode .about-photo-card {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.05) 100%),
+        rgba(12, 17, 26, 0.88) !important;
+    }
+
+    .potato-mode .aurora-blob {
+      display: none !important;
+    }
+
+    /* Drawer Performance Toggle Button */
+    .drawer-perf-toggle-wrap {
+      width: 100%;
+      margin-top: 14px;
+    }
+
+    .drawer-perf-toggle-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #f1f5f9;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .drawer-perf-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+
+    .perf-toggle-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-align: left;
+    }
+
+    .perf-toggle-icon {
+      width: 16px;
+      height: 16px;
+      color: var(--c-accent-amber);
+      flex-shrink: 0;
+    }
+
+    .perf-toggle-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .perf-toggle-title {
+      font-size: 0.80rem;
+      font-weight: 600;
+      color: #f8fafc;
+      letter-spacing: 0.01em;
+    }
+
+    .perf-toggle-desc {
+      font-size: 0.65rem;
+      color: #94a3b8;
+    }
+
+    .perf-toggle-switch {
+      width: 38px;
+      height: 22px;
+      border-radius: 11px;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      position: relative;
+      flex-shrink: 0;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .perf-switch-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #ffffff;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease;
+    }
+
+    .potato-mode .perf-toggle-switch {
+      background: rgba(245, 158, 11, 0.35);
+      border-color: rgba(245, 158, 11, 0.60);
+    }
+
+    .potato-mode .perf-switch-thumb {
+      transform: translateX(16px);
+      background: var(--c-accent-amber);
+    }
   </style>
 </head>
 <body>
 
-  <!-- Background Layout Layer (Static Image - Anti Frame Drop) -->
+  <!-- Background Layout Layer (WebP 96KB + JPEG Fallback - Anti Frame Drop) -->
   <div class="bg-image-layer">
-    <img src={`${baseUrl}/assets/bg_layout.jpg`} alt="Background Layout" id="bg-image" class="bg-image">
+    <picture>
+      <source srcset={`${baseUrl}/assets/bg_layout.webp`} type="image/webp">
+      <img src={`${baseUrl}/assets/bg_layout.jpg`} alt="Background Layout" id="bg-image" class="bg-image" loading="eager" decoding="async">
+    </picture>
   </div>
 
   <!-- Ambient Scrim -->
@@ -2801,6 +2957,24 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         <div class="drawer-card-sub">
           Work in progress
         </div>
+      </div>
+
+      <!-- TOGGLE MODE 60 FPS ULTRA SMOOTH (ECO MODE) -->
+      <div class="drawer-perf-toggle-wrap">
+        <button class="drawer-perf-toggle-btn" id="btn-perf-toggle" onclick="togglePerformanceMode()" aria-label="Toggle 60 FPS Smooth Mode">
+          <div class="perf-toggle-left">
+            <svg class="perf-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+            </svg>
+            <div class="perf-toggle-info">
+              <span class="perf-toggle-title">60 FPS Smooth Mode</span>
+              <span class="perf-toggle-desc" id="perf-toggle-status">Auto (GPU Optimized)</span>
+            </div>
+          </div>
+          <div class="perf-toggle-switch" id="perf-toggle-switch">
+            <div class="perf-switch-thumb"></div>
+          </div>
+        </button>
       </div>
     </div>
 
@@ -3230,7 +3404,10 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         <!-- 1. KARTU FOTO (TOP-LEFT): FADED ZOOM OUT (FADED WHITE MILK 45%) -->
         <div class="about-photo-card" id="about-photo-card" role="img" aria-label="Foto Profil Muhammad Zaqi Prasetyo">
           <div class="about-photo-frame">
-            <img src={`${baseUrl}/assets/profile_photo.jpg`} alt="Muhammad Zaqi Prasetyo" id="about-photo-img" class="about-photo-img">
+            <picture>
+              <source srcset={`${baseUrl}/assets/profile_photo.webp`} type="image/webp">
+              <img src={`${baseUrl}/assets/profile_photo.jpg`} alt="Muhammad Zaqi Prasetyo" id="about-photo-img" class="about-photo-img" loading="eager" decoding="async">
+            </picture>
           </div>
         </div>
 
@@ -3835,7 +4012,54 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       });
     }
 
+    // DETEKSI OTOMATIS HP KENTANG (RAM <= 2GB ATAU CPU <= 4 CORE)
+    function initPerformanceMode() {
+      const stored = localStorage.getItem("moezaq_perf_mode");
+      const statusText = document.getElementById("perf-toggle-status");
+
+      let isLite = false;
+      if (stored !== null) {
+        isLite = stored === "true";
+      } else {
+        const memory = navigator.deviceMemory;
+        const cores = navigator.hardwareConcurrency;
+        const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        // Jika RAM <= 2GB atau CPU thread <= 4 atau prefers-reduced-motion
+        if ((memory && memory <= 2) || (cores && cores <= 4) || prefersReduced) {
+          isLite = true;
+        }
+      }
+
+      if (isLite) {
+        document.documentElement.classList.add("potato-mode");
+        if (statusText) statusText.textContent = "Aktif (60 FPS Smooth)";
+      } else {
+        document.documentElement.classList.remove("potato-mode");
+        if (statusText) statusText.textContent = "Mati (Full Glass Blur)";
+      }
+    }
+
+    function togglePerformanceMode() {
+      const isCurrentlyPotato = document.documentElement.classList.contains("potato-mode");
+      const statusText = document.getElementById("perf-toggle-status");
+
+      if (isCurrentlyPotato) {
+        document.documentElement.classList.remove("potato-mode");
+        localStorage.setItem("moezaq_perf_mode", "false");
+        if (statusText) statusText.textContent = "Mati (Full Glass Blur)";
+      } else {
+        document.documentElement.classList.add("potato-mode");
+        localStorage.setItem("moezaq_perf_mode", "true");
+        if (statusText) statusText.textContent = "Aktif (60 FPS Smooth)";
+      }
+
+      if (navigator.vibrate) navigator.vibrate(10);
+    }
+
+    // Jalankan deteksi instan
+    initPerformanceMode();
     window.addEventListener("DOMContentLoaded", () => {
+      initPerformanceMode();
       startChoreography();
       setupTactileFeedback();
       setupCarouselDots();
