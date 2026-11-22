@@ -1923,34 +1923,83 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       color: var(--c-accent-amber);
     }
 
-    /* Kunci tinggi 1 baris saat tertutup (Mencegah isi nongol di bawah kartu) */
+    /* Kunci tinggi 1 baris saat tertutup (Definitif 100% bebas bocor) */
+    .about-quick-card {
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+    }
+
     .about-quick-card:not(.is-expanded) {
-      height: 36px;
-      max-height: 36px;
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+      box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.55) !important;
     }
 
     .about-quick-card.is-expanded {
-      height: auto;
-      max-height: none;
+      height: auto !important;
+      min-height: 36px !important;
+      max-height: none !important;
+      overflow: hidden !important;
     }
 
-    /* Drawer Expand to Down: Tersembunyi 100% saat tertutup */
-    .quick-card-body {
-      display: grid;
-      grid-template-rows: 0fr;
-      overflow: hidden;
-      visibility: hidden;
-      opacity: 0;
-      transition:
-        grid-template-rows 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.22s ease,
-        visibility 0.32s ease;
+    .quick-card-header {
+      width: 100%;
+      height: 34px;
+      min-height: 34px;
+      box-sizing: border-box;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
     }
 
+    .about-quick-card.is-expanded .quick-card-header {
+      height: 36px;
+      min-height: 36px;
+    }
+
+    /* Saat card tertutup: body 100% display: none dan mutlak dikeluarkan dari layout tree */
+    .about-quick-card:not(.is-expanded) .quick-card-body {
+      display: none !important;
+      height: 0 !important;
+      min-height: 0 !important;
+      max-height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      overflow: hidden !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    .about-quick-card:not(.is-expanded) .quick-card-body-inner {
+      display: none !important;
+      height: 0 !important;
+      min-height: 0 !important;
+      max-height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      overflow: hidden !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    /* Saat card terbuka: tampil dengan animasi expand halus */
     .about-quick-card.is-expanded .quick-card-body {
-      grid-template-rows: 1fr;
-      visibility: visible;
-      opacity: 1;
+      display: block !important;
+      height: auto !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      animation: quickCardExpand 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     .quick-card-body-inner {
@@ -1963,9 +2012,24 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       border-top: 1px dashed rgba(255, 255, 255, 0.14);
     }
 
-    .about-quick-card:not(.is-expanded) .quick-card-body-inner {
-      padding: 0;
-      border-top: none;
+    .about-quick-card.is-expanded .quick-card-body-inner {
+      display: flex !important;
+      height: auto !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    @keyframes quickCardExpand {
+      from {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* Format Item Dalam Card */
@@ -2671,13 +2735,20 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         border-radius: 10px;
       }
       .about-quick-card:not(.is-expanded) {
-        height: 32px;
-        max-height: 32px;
+        height: 32px !important;
+        min-height: 32px !important;
+        max-height: 32px !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
       }
       .quick-card-header {
+        height: 30px;
+        min-height: 30px;
+        padding: 0 10px;
+      }
+      .about-quick-card.is-expanded .quick-card-header {
         height: 32px;
         min-height: 32px;
-        padding: 0 10px;
       }
       .quick-card-title {
         font-size: 0.72rem;
@@ -2689,10 +2760,6 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       .quick-card-body-inner {
         padding: 4px 10px 10px 10px;
         gap: 5px;
-      }
-      .about-quick-card:not(.is-expanded) .quick-card-body-inner {
-        padding: 0;
-        border-top: none;
       }
       .pipe-left {
         font-size: 0.66rem;
