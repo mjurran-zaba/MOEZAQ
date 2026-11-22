@@ -1944,6 +1944,280 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       background: rgba(229, 179, 66, 0.45);
     }
 
+    /* Transition ketika kartu keluar saat NOTEZ dibuka */
+    .about-bottom-zone.exiting {
+      opacity: 0 !important;
+      transform: translate3d(0, 20px, 0) !important;
+      transition:
+        opacity 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.24s cubic-bezier(0.22, 1, 0.36, 1) !important;
+      pointer-events: none !important;
+    }
+
+    /*
+      ======================================================
+      PANGGUNG MINI BROWSER NOTEZ (SUB-STAGE VIEWPORT)
+      ======================================================
+    */
+    .notez-browser-stage {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      flex: 1 1 auto;
+      min-height: 0;
+      position: relative;
+      opacity: 0;
+      transform: translate3d(0, 22px, 0);
+      transition:
+        opacity 0.34s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.34s cubic-bezier(0.16, 1, 0.3, 1);
+      padding-top: 4px;
+      padding-bottom: 24px;
+      gap: 8px;
+    }
+
+    .notez-browser-stage.revealed {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .notez-browser-stage.exiting {
+      opacity: 0 !important;
+      transform: translate3d(0, 20px, 0) !important;
+      transition:
+        opacity 0.24s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.24s cubic-bezier(0.22, 1, 0.36, 1) !important;
+      pointer-events: none !important;
+    }
+
+    /* Bar Mini Browser */
+    .mini-browser-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      flex-shrink: 0;
+      padding: 6px 10px;
+      border-radius: 12px;
+      background: rgba(14, 20, 30, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    }
+
+    .browser-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .btn-browser-back {
+      height: 28px;
+      padding: 0 10px;
+      border-radius: 7px;
+      border: 1px solid rgba(229, 179, 66, 0.40);
+      background: rgba(229, 179, 66, 0.15);
+      color: #fef08a;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      flex-shrink: 0;
+      transition:
+        background 0.14s ease,
+        transform 0.14s ease,
+        border-color 0.14s ease;
+    }
+
+    .btn-browser-back svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .btn-browser-back:hover {
+      background: rgba(229, 179, 66, 0.25);
+      border-color: rgba(229, 179, 66, 0.65);
+      transform: translateY(-1px);
+    }
+
+    .btn-browser-back:active {
+      transform: scale(0.94);
+    }
+
+    .browser-url-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.50);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      color: var(--c-text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.02em;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .browser-lock-icon {
+      width: 11px;
+      height: 11px;
+      color: var(--c-accent-emerald);
+      flex-shrink: 0;
+    }
+
+    .browser-url-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .browser-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .btn-browser-external {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.06);
+      color: #cbd5e1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition:
+        background 0.14s ease,
+        color 0.14s ease,
+        transform 0.14s ease;
+    }
+
+    .btn-browser-external svg {
+      width: 13px;
+      height: 13px;
+    }
+
+    .btn-browser-external:hover {
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    /* Viewport Frame Iframe */
+    .mini-browser-viewport {
+      width: 100%;
+      flex: 1 1 auto;
+      min-height: 0;
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(10, 14, 22, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow:
+        0 14px 32px -6px rgba(0, 0, 0, 0.75),
+        inset 1px 1px 1.5px rgba(255, 255, 255, 0.18);
+    }
+
+    .mini-browser-viewport iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+      background: #05070a;
+    }
+
+    .browser-loader {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: rgba(5, 7, 10, 0.94);
+      color: var(--c-text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      z-index: 5;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .browser-loader.is-hidden {
+      opacity: 0;
+    }
+
+    .browser-spinner {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2.5px solid rgba(229, 179, 66, 0.20);
+      border-top-color: var(--c-accent-amber);
+      animation: spinBrowserLoader 0.75s linear infinite;
+    }
+
+    @keyframes spinBrowserLoader {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Interactive Clickable Project Item */
+    .quick-project-clickable {
+      cursor: pointer;
+      position: relative;
+      transition: background 0.15s ease, transform 0.15s ease;
+      border-radius: 6px;
+      padding: 4px 6px !important;
+      margin: 0 -6px;
+    }
+
+    .quick-project-clickable:hover {
+      background: rgba(229, 179, 66, 0.14);
+      transform: translateX(2px);
+    }
+
+    .quick-project-clickable:active {
+      transform: scale(0.97);
+    }
+
+    .project-link-highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .project-view-badge {
+      font-family: var(--font-mono);
+      font-size: 0.54rem;
+      font-weight: 700;
+      color: var(--c-accent-amber);
+      background: rgba(245, 158, 11, 0.16);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      padding: 1px 5px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+    }
+
     /* Kolom Kiri: 5 Card 1 Baris (Expand to Down saat di-tap) */
     .about-quick-cards {
       flex: 0 0 calc(50% - 6px);
@@ -3368,8 +3642,11 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
             </div>
             <div class="quick-card-body">
               <div class="quick-card-body-inner">
-                <div class="quick-pipe-item">
-                  <span class="pipe-left">NOTEZ</span>
+                <div class="quick-pipe-item quick-project-clickable" id="item-project-notez" role="button" tabindex="0" title="Buka NOTEZ (Live Sub-Stage)" aria-label="Buka NOTEZ Landing Page">
+                  <span class="pipe-left project-link-highlight">
+                    <span>NOTEZ</span>
+                    <span class="project-view-badge">OPEN ↗</span>
+                  </span>
                   <span class="pipe-sep">|</span>
                   <span class="pipe-right"><code class="pipe-code">v0.2.0</code></span>
                 </div>
@@ -3440,6 +3717,56 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
             </a>
           </div>
         </article>
+
+      </div>
+
+      <!-- 4. PANGGUNG MINI BROWSER NOTEZ (SUB-STAGE EMBEDDED VIEWPORT) -->
+      <div class="notez-browser-stage" id="notez-browser-stage">
+        
+        <!-- Bar Mini Browser: Kontrol navigasi & URL indicator -->
+        <div class="mini-browser-bar">
+          <div class="browser-bar-left">
+            <button class="btn-browser-back" id="btn-close-notez" onclick="closeNotezStage(true)" aria-label="Kembali ke Player Stats" title="Kembali ke Profil">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+              <span>STATS</span>
+            </button>
+            <div class="browser-url-pill">
+              <svg class="browser-lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <span class="browser-url-text">mjurran-zaba.github.io/NOTEZ</span>
+            </div>
+          </div>
+
+          <div class="browser-bar-right">
+            <a href="https://mjurran-zaba.github.io/NOTEZ/" target="_blank" rel="noopener noreferrer" class="btn-browser-external" title="Buka Penuh di Tab Baru" aria-label="Buka Penuh di Tab Baru">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Frame Viewport Mini Browser (Iframe Live ke NOTEZ) -->
+        <div class="mini-browser-viewport" id="mini-browser-viewport">
+          <div class="browser-loader" id="browser-loader">
+            <div class="browser-spinner"></div>
+            <span>Memuat NOTEZ...</span>
+          </div>
+          <iframe 
+            id="notez-iframe" 
+            src="about:blank" 
+            data-src="https://mjurran-zaba.github.io/NOTEZ/"
+            title="NOTEZ Product Landing Page"
+            loading="lazy"
+            allow="clipboard-write"
+          ></iframe>
+        </div>
 
       </div>
 
@@ -3576,10 +3903,109 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       });
     }
 
+    // ========================================================
+    // SUB-STAGE MINI-BROWSER NOTEZ & BACK GESTURE CONTROLLER
+    // ========================================================
+    const notezBrowserStage = document.getElementById("notez-browser-stage");
+    const notezIframe = document.getElementById("notez-iframe");
+    const browserLoader = document.getElementById("browser-loader");
+    const itemProjectNotez = document.getElementById("item-project-notez");
+
+    function openNotezStage(pushHistory = true) {
+      if (!notezBrowserStage || !bottomScrollZone) return;
+
+      if (navigator.vibrate) navigator.vibrate(12);
+
+      // Push history state so Android swipe-back & hardware back button return to profile
+      if (pushHistory) {
+        history.pushState({ stage: "notez" }, "", "#notez");
+      }
+
+      // Smooth exit for bottom zone cards
+      bottomScrollZone.classList.add("exiting");
+
+      setTimeout(() => {
+        bottomScrollZone.style.display = "none";
+        notezBrowserStage.style.display = "flex";
+
+        // Load iframe if not yet loaded
+        if (notezIframe && (!notezIframe.src || notezIframe.src.endsWith("about:blank"))) {
+          const targetUrl = notezIframe.getAttribute("data-src") || "https://mjurran-zaba.github.io/NOTEZ/";
+          notezIframe.src = targetUrl;
+
+          notezIframe.onload = () => {
+            if (browserLoader) browserLoader.classList.add("is-hidden");
+          };
+          // Timeout fallback in case offline or fast load
+          setTimeout(() => {
+            if (browserLoader) browserLoader.classList.add("is-hidden");
+          }, 1800);
+        } else {
+          if (browserLoader) browserLoader.classList.add("is-hidden");
+        }
+
+        requestAnimationFrame(() => {
+          notezBrowserStage.classList.add("revealed");
+        });
+      }, 220);
+    }
+
+    function closeNotezStage(triggerBack = true) {
+      if (!notezBrowserStage || !bottomScrollZone) return;
+
+      if (navigator.vibrate) navigator.vibrate(8);
+
+      // Handle history if closed manually via button
+      if (triggerBack && window.location.hash === "#notez") {
+        history.back();
+        return; // popstate listener below will complete the transition
+      }
+
+      notezBrowserStage.classList.add("exiting");
+
+      setTimeout(() => {
+        notezBrowserStage.style.display = "none";
+        notezBrowserStage.classList.remove("revealed", "exiting");
+
+        bottomScrollZone.style.display = "flex";
+        requestAnimationFrame(() => {
+          bottomScrollZone.classList.remove("exiting");
+        });
+      }, 220);
+    }
+
+    window.openNotezStage = openNotezStage;
+    window.closeNotezStage = closeNotezStage;
+
+    // Android / iOS Swipe Back Gesture & Browser Back Handler
+    window.addEventListener("popstate", (e) => {
+      if (window.location.hash !== "#notez") {
+        if (notezBrowserStage && notezBrowserStage.style.display === "flex") {
+          closeNotezStage(false);
+        }
+      } else {
+        openNotezStage(false);
+      }
+    });
+
     window.addEventListener("DOMContentLoaded", () => {
       runPortfolioSpawn();
       setupQuickCardsAccordion();
       setupTactileFeedback();
+
+      if (itemProjectNotez) {
+        itemProjectNotez.addEventListener("click", (e) => {
+          e.stopPropagation(); // prevent accordion collapse
+          openNotezStage(true);
+        });
+      }
+
+      // Check direct link with #notez
+      if (window.location.hash === "#notez") {
+        setTimeout(() => {
+          openNotezStage(false);
+        }, 350);
+      }
 
       const btnPanel = document.getElementById("btn-topbar-panel");
       if (btnPanel) {
