@@ -2292,14 +2292,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     .about-quick-card.is-sticky-dragging {
       z-index: 35 !important;
       cursor: grabbing !important;
-      border-color: rgba(229, 179, 66, 0.70) !important;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.12) 100%),
-        rgba(26, 36, 52, 0.65) !important;
-      box-shadow:
-        0 18px 40px -6px rgba(0, 0, 0, 0.90),
-        0 0 22px rgba(229, 179, 66, 0.40),
-        inset 1px 1px 2px rgba(255, 255, 255, 0.38) !important;
+      box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.72) !important;
       transition: none !important;
       touch-action: none !important;
     }
@@ -3919,21 +3912,19 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       let lastY = 0;
       let cardsCache = [];
 
-      // Perbarui cache geometri kartu sekali saat gesture dimulai (mencegah layout thrashing 60/120fps)
+      // Perbarui cache geometri kartu sekali saat gesture dimulai
       function updateCardsCache() {
         if (!quickCards || quickCards.length === 0) return;
         cardsCache = Array.from(quickCards).map(card => {
           const rect = card.getBoundingClientRect();
           return {
             card,
-            centerY: (rect.top + rect.bottom) / 2,
-            top: rect.top,
-            bottom: rect.bottom
+            centerY: (rect.top + rect.bottom) / 2
           };
         });
       }
 
-      // Deteksi kartu terdekat dari posisi Y jari (perhitungan instan < 0.001ms tanpa reflow)
+      // Deteksi kartu terdekat dari posisi Y jari
       function getBestCardForY(clientY) {
         if (!cardsCache || cardsCache.length === 0) return null;
 
@@ -3951,7 +3942,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         return bestCard;
       }
 
-      // Mulai gesture sentuhan (sensitivitas ultra tinggi: 90ms hold)
+      // Mulai gesture sentuhan
       function startGesture(card, clientX, clientY) {
         isTracking = true;
         startX = clientX;
@@ -3960,11 +3951,10 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         cardTouchStartY = clientY;
         currentDeltaY = 0;
 
-        // Ambil posisi kartu di awal (hanya 1x, tidak membebani touchmove)
         updateCardsCache();
 
         if (holdTimer) clearTimeout(holdTimer);
-        // Sensitivitas dipercepat dari 180ms menjadi 90ms (respons seketika)
+        // Waktu hold natural
         holdTimer = setTimeout(() => {
           if (!isTracking) return;
 
@@ -3974,25 +3964,25 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
           cardTouchStartY = lastY;
           currentDeltaY = 0;
 
+          // Cukup haptic dan card sedikit terangkat (scale 1.025), tanpa efek glass transparan tambahan
           activeCard.classList.add("is-sticky-dragging");
           activeCard.style.transition = "none";
-          activeCard.style.transform = "translate3d(0, 0, 0) scale(1.038)";
+          activeCard.style.transform = "translate3d(0, 0, 0) scale(1.025)";
 
           if (navigator.vibrate) navigator.vibrate(12);
-        }, 90);
+        }, 130);
       }
 
-      // Pergerakan gesture: 1:1 direct tracking instan tanpa jeda
+      // Pergerakan gesture: Sensitivitas tinggi saat geser-geser + rule batasan card atas & bawah
       function moveGesture(clientX, clientY, e) {
         if (!isTracking) return;
 
-        // 1. Sebelum masuk sticky mode (selama 90ms):
+        // 1. Sebelum masuk sticky mode
         if (!isStickySession) {
           const diffX = clientX - startX;
           const diffY = clientY - startY;
 
-          // Hanya batalkan jika pengguna sengaja fling/swipe scroll cepat (> 14px)
-          if (Math.hypot(diffX, diffY) > 14) {
+          if (Math.hypot(diffX, diffY) > 12) {
             if (holdTimer) {
               clearTimeout(holdTimer);
               holdTimer = null;
@@ -4006,23 +3996,21 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
           return;
         }
 
-        // 2. Mode sticky aktif: cegah scroll default browser
+        // 2. Mode sticky aktif
         if (e && e.cancelable) {
           e.preventDefault();
         }
 
-        // Cari kartu yang paling dekat dengan posisi Y jempol saat ini
+        // Cari kartu yang dituju jari
         const targetCard = getBestCardForY(clientY);
 
-        // Transisi mulus ke kartu berikutnya (Card 1 -> Card 2, Card 3, dst.)
+        // Transisi ke kartu berikutnya
         if (targetCard && targetCard !== activeCard) {
-          // Kartu lama memantul pulang dengan cepat & taktil (0.22s)
           if (activeCard) {
             const prevCard = activeCard;
             prevCard.classList.remove("is-sticky-dragging");
-            prevCard.style.transition = "transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.20s ease, border-color 0.20s ease";
+            prevCard.style.transition = "transform 0.22s cubic-bezier(0.16, 1, 0.3, 1)";
             prevCard.style.transform = "translate3d(0, 0, 0) scale(1)";
-            prevCard.style.boxShadow = "";
             setTimeout(() => {
               if (!prevCard.classList.contains("is-sticky-dragging")) {
                 prevCard.style.transition = "";
@@ -4031,33 +4019,37 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
             }, 240);
           }
 
-          // Kartu baru langsung aktif seketika: set anchor start ke clientY saat ini
           activeCard = targetCard;
           cardTouchStartY = clientY;
           currentDeltaY = 0;
           activeCard.classList.add("is-sticky-dragging");
           activeCard.style.transition = "none";
-          activeCard.style.transform = "translate3d(0, 0, 0) scale(1.038)";
+          activeCard.style.transform = "translate3d(0, 0, 0) scale(1.025)";
 
           if (navigator.vibrate) navigator.vibrate(10);
         }
 
-        // Hitung perpindahan slide 1:1 yang langsung merespons gerakan jari
+        // Perhitungan pergeseran: Sensitivitas tinggi responsif
         if (activeCard) {
           const rawDelta = clientY - cardTouchStartY;
-          const maxTravel = 62;
-          let dampedDelta = rawDelta;
+          // Sensitivitas geser dinaikkan: respon cepat 1.15x tanpa lag
+          let deltaY = rawDelta * 1.15;
+          const maxTravel = 52;
+          deltaY = Math.sign(deltaY) * Math.min(Math.abs(deltaY), maxTravel);
 
-          // 1:1 direct tracking responsif sampai 28px, lalu rubber-band halus sampai 62px
-          if (Math.abs(rawDelta) > 28) {
-            const over = Math.abs(rawDelta) - 28;
-            dampedDelta = Math.sign(rawDelta) * (28 + Math.min(over * 0.55, maxTravel - 28));
+          // Rule batasan: card paling atas ngga bisa kegeser keatas, card paling bawah ngga bisa kegeser ke bawah
+          const isTopCard = (activeCard === quickCards[0]);
+          const isBottomCard = (activeCard === quickCards[quickCards.length - 1]);
+
+          if (isTopCard && deltaY < 0) {
+            deltaY = 0;
           }
-          currentDeltaY = dampedDelta;
+          if (isBottomCard && deltaY > 0) {
+            deltaY = 0;
+          }
 
-          const intensity = Math.min(Math.abs(currentDeltaY) / maxTravel, 1);
-          activeCard.style.transform = `translate3d(0, ${currentDeltaY}px, 0) scale(${1.038 + intensity * 0.015})`;
-          activeCard.style.boxShadow = `0 ${18 + intensity * 8}px 42px -6px rgba(0, 0, 0, 0.92), 0 0 ${20 + intensity * 14}px rgba(229, 179, 66, ${0.30 + intensity * 0.25}), inset 1px 1px 2px rgba(255, 255, 255, 0.38)`;
+          currentDeltaY = deltaY;
+          activeCard.style.transform = `translate3d(0, ${currentDeltaY}px, 0) scale(1.025)`;
         }
 
         lastY = clientY;
@@ -4078,9 +4070,8 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
           if (activeCard) {
             const cardToReset = activeCard;
-            cardToReset.style.transition = "transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease";
+            cardToReset.style.transition = "transform 0.24s cubic-bezier(0.16, 1, 0.3, 1)";
             cardToReset.style.transform = "translate3d(0, 0, 0) scale(1)";
-            cardToReset.style.boxShadow = "";
 
             if (navigator.vibrate) navigator.vibrate(8);
 
@@ -4088,7 +4079,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
               cardToReset.classList.remove("is-sticky-dragging");
               cardToReset.style.transition = "";
               cardToReset.style.transform = "";
-            }, 280);
+            }, 260);
 
             activeCard = null;
           }
@@ -4102,21 +4093,18 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
       // Pasang listener pada masing-masing kartu
       quickCards.forEach(card => {
-        // Touch events langsung (mobile native)
         card.addEventListener("touchstart", (e) => {
           if (!e.touches || e.touches.length === 0) return;
           const t = e.touches[0];
           startGesture(card, t.clientX, t.clientY);
         }, { passive: true });
 
-        // Pointer down untuk mouse desktop
         card.addEventListener("pointerdown", (e) => {
           if (e.pointerType === "touch") return;
           if (e.button !== 0) return;
           startGesture(card, e.clientX, e.clientY);
         });
 
-        // Click handler biasa (Accordion expand/collapse saat tap biasa)
         card.addEventListener("click", (e) => {
           if (wasDragged) {
             e.preventDefault();
