@@ -692,38 +692,38 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       -webkit-user-select: none;
     }
 
-    /* 3 DOTS SLIDE INDICATOR (TANPA EMBEL-EMBEL TEKS) */
+    /* 3 DOTS SLIDE INDICATOR (MINIMALIS & TIDAK MAKAN TEMPAT) */
     .drawer-carousel-dots {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
+      gap: 5px;
       width: 100%;
-      margin-top: 10px;
+      margin-top: 6px;
       user-select: none;
       -webkit-user-select: none;
     }
 
     .drawer-carousel-dot {
-      width: 7px;
-      height: 7px;
+      width: 4px;
+      height: 4px;
       padding: 0;
       border: none;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.20);
+      background: rgba(255, 255, 255, 0.22);
       cursor: pointer;
       transition:
-        width 0.22s cubic-bezier(0.16, 1, 0.3, 1),
-        border-radius 0.22s ease,
-        background 0.22s ease,
-        box-shadow 0.22s ease;
+        width 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+        border-radius 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
     }
 
     .drawer-carousel-dot.active {
-      width: 18px;
-      border-radius: 4px;
+      width: 11px;
+      border-radius: 2px;
       background: var(--c-accent-amber);
-      box-shadow: 0 0 10px rgba(229, 179, 66, 0.55);
+      box-shadow: 0 0 6px rgba(229, 179, 66, 0.45);
     }
 
     /* GARIS HORIZONTAL PEMBATAS */
@@ -731,7 +731,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       width: 100%;
       height: 1px;
       background: linear-gradient(90deg, transparent 0%, rgba(229, 179, 66, 0.32) 50%, transparent 100%);
-      margin: 16px 0 14px 0;
+      margin: 12px 0 10px 0;
       position: relative;
       z-index: 2;
     }
@@ -3528,38 +3528,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         tabindex="0"
         aria-label="Events Carousel"
       >
-        <!-- Slide 1: Void Guild Card -->
-        <div
-          class="drawer-slide-card"
-          role="button"
-          tabindex="0"
-          aria-label="Lihat Preview Kartu Void Guild"
-          onclick="openCommsLightbox('void_card')"
-        >
-          <picture>
-            <source srcset={`${baseUrl}/assets/void_guild_card.webp`} type="image/webp">
-            <img
-              src={`${baseUrl}/assets/void_guild_card.jpg`}
-              alt="VOID GUILD Adventurer Pass"
-              class="drawer-board-img"
-              loading="lazy"
-              decoding="async"
-              width="1280"
-              height="820"
-            />
-          </picture>
-          <div class="drawer-board-vignette" aria-hidden="true"></div>
-          <div class="drawer-board-zoom-hint" aria-hidden="true" title="Tap untuk perbesar">
-            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="15 3 21 3 21 9"></polyline>
-              <polyline points="9 21 3 21 3 15"></polyline>
-              <line x1="21" y1="3" x2="14" y2="10"></line>
-              <line x1="3" y1="21" x2="10" y2="14"></line>
-            </svg>
-          </div>
-        </div>
-
-        <!-- Slide 2: Commissions Open Quest Board -->
+        <!-- Slide 1: Commissions Open Quest Board (Default First) -->
         <div
           class="drawer-slide-card"
           role="button"
@@ -3577,6 +3546,37 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
               decoding="async"
               width="1920"
               height="1280"
+            />
+          </picture>
+          <div class="drawer-board-vignette" aria-hidden="true"></div>
+          <div class="drawer-board-zoom-hint" aria-hidden="true" title="Tap untuk perbesar">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <polyline points="9 21 3 21 3 15"></polyline>
+              <line x1="21" y1="3" x2="14" y2="10"></line>
+              <line x1="3" y1="21" x2="10" y2="14"></line>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Slide 2: Void Guild Card -->
+        <div
+          class="drawer-slide-card"
+          role="button"
+          tabindex="0"
+          aria-label="Lihat Preview Kartu Void Guild"
+          onclick="openCommsLightbox('void_card')"
+        >
+          <picture>
+            <source srcset={`${baseUrl}/assets/void_guild_card.webp`} type="image/webp">
+            <img
+              src={`${baseUrl}/assets/void_guild_card.jpg`}
+              alt="VOID GUILD Adventurer Pass"
+              class="drawer-board-img"
+              loading="lazy"
+              decoding="async"
+              width="1280"
+              height="820"
             />
           </picture>
           <div class="drawer-board-vignette" aria-hidden="true"></div>
@@ -3675,11 +3675,11 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     <div class="lightbox-dialog" onclick="closeCommsLightbox()">
       <div class="lightbox-image-wrap">
         <picture>
-          <source id="lightbox-source-webp" srcset={`${baseUrl}/assets/void_guild_card.webp`} type="image/webp">
+          <source id="lightbox-source-webp" srcset={`${baseUrl}/assets/comms_board.webp`} type="image/webp">
           <img
             id="lightbox-source-img"
-            src={`${baseUrl}/assets/void_guild_card.jpg`}
-            alt="Preview Kartu"
+            src={`${baseUrl}/assets/comms_board.jpg`}
+            alt="Commissions Open Master Preview"
             class="lightbox-img"
             loading="lazy"
             decoding="async"
@@ -3687,7 +3687,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         </picture>
       </div>
       <div class="lightbox-caption">
-        <span id="lightbox-caption-text">VOID GUILD · ADVENTURER PASS</span>
+        <span id="lightbox-caption-text">NEGOTIABLE BOUNTY</span>
       </div>
     </div>
   </div>
@@ -4307,24 +4307,26 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       });
     }
 
-    // LIGHTBOX PREVIEW HANDLERS (SUPPORTS VOID CARD & COMMISSIONS)
-    function openCommsLightbox(type = "void_card") {
+    // LIGHTBOX PREVIEW HANDLERS (SUPPORTS COMMISSIONS & VOID CARD)
+    function openCommsLightbox(type = "comms") {
       const lb = document.getElementById("lightbox-comms");
       const imgWebp = document.getElementById("lightbox-source-webp");
       const imgJpg = document.getElementById("lightbox-source-img");
       const captionEl = document.getElementById("lightbox-caption-text");
 
+      const base = window.location.pathname.includes("/MOEZAQ") ? "/MOEZAQ" : "";
+
       if (type === "void_card") {
-        if (imgWebp) imgWebp.srcset = `${baseUrl}/assets/void_guild_card.webp`;
+        if (imgWebp) imgWebp.srcset = base + "/assets/void_guild_card.webp";
         if (imgJpg) {
-          imgJpg.src = `${baseUrl}/assets/void_guild_card.jpg`;
+          imgJpg.src = base + "/assets/void_guild_card.jpg";
           imgJpg.alt = "VOID GUILD Adventurer Pass Preview";
         }
         if (captionEl) captionEl.textContent = "VOID GUILD · ADVENTURER PASS";
       } else {
-        if (imgWebp) imgWebp.srcset = `${baseUrl}/assets/comms_board.webp`;
+        if (imgWebp) imgWebp.srcset = base + "/assets/comms_board.webp";
         if (imgJpg) {
-          imgJpg.src = `${baseUrl}/assets/comms_board.jpg`;
+          imgJpg.src = base + "/assets/comms_board.jpg";
           imgJpg.alt = "Commissions Open Master Preview";
         }
         if (captionEl) captionEl.textContent = "NEGOTIABLE BOUNTY";
@@ -4389,6 +4391,17 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       if (open) {
         drawerPanel.classList.add("open");
         drawerBackdrop.classList.add("active");
+
+        // Reset carousel ke slide pertama (COMMISSIONS OPEN) setiap kali drawer dibuka
+        const track = document.getElementById("drawer-carousel-track");
+        if (track) {
+          track.scrollLeft = 0;
+        }
+        const dots = document.querySelectorAll(".drawer-carousel-dot");
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle("active", idx === 0);
+        });
+
         if (navigator.vibrate) navigator.vibrate(10);
       } else {
         drawerPanel.classList.remove("open");
