@@ -473,80 +473,11 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         radial-gradient(ellipse at 50% 50%, transparent 25%, rgba(6, 9, 14, 0.65) 100%);
     }
 
-    /* Optimasi Kinerja: Hentikan total animasi aurora dan floating saat drawer tertutup */
-    .drawer-panel:not(.open) .aurora-blob,
-    .drawer-panel:not(.open) .drawer-glass-card {
-      animation-play-state: paused !important;
-    }
 
-    .drawer-aurora-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.78;
-      mix-blend-mode: screen;
-    }
-
-    .aurora-blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(52px);
-      opacity: 0.82;
-      will-change: transform;
-    }
-
-    .aurora-blob-gold {
-      width: 250px;
-      height: 250px;
-      background: radial-gradient(circle, rgba(229, 179, 66, 0.34) 0%, transparent 70%);
-      top: 8%;
-      right: -50px;
-      animation: driftAuroraGold 15s ease-in-out infinite alternate;
-    }
-
-    .aurora-blob-velvet {
-      width: 290px;
-      height: 290px;
-      background: radial-gradient(circle, rgba(118, 30, 134, 0.65) 0%, transparent 70%);
-      bottom: 12%;
-      left: -60px;
-      animation: driftAuroraVelvet 18s ease-in-out infinite alternate;
-    }
-
-    .aurora-blob-gray {
-      width: 270px;
-      height: 270px;
-      background: radial-gradient(circle, rgba(58, 72, 92, 0.58) 0%, transparent 70%);
-      top: 42%;
-      left: 15%;
-      animation: driftAuroraGray 21s ease-in-out infinite alternate;
-    }
-
-    @keyframes driftAuroraGold {
-      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-      50% { transform: translate(-50px, 80px) scale(1.18) rotate(45deg); }
-      100% { transform: translate(-20px, 160px) scale(0.92) rotate(90deg); }
-    }
-
-    @keyframes driftAuroraVelvet {
-      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-      50% { transform: translate(60px, -90px) scale(1.22) rotate(-35deg); }
-      100% { transform: translate(35px, -170px) scale(1.05) rotate(-70deg); }
-    }
-
-    @keyframes driftAuroraGray {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(-40px, -60px) scale(0.88); }
-      100% { transform: translate(50px, 60px) scale(1.15); }
-    }
 
     .drawer-top-bar,
-    .drawer-board-card,
+    .drawer-events-zone,
+    .drawer-contact-zone,
     .drawer-comms-row,
     .drawer-center-wrap,
     .drawer-bottom-bar {
@@ -642,11 +573,65 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       padding: 16px 0;
     }
 
-    /* Tavern Quest & Commissions Board dengan Lightbox Trigger */
-    .drawer-board-card {
-      position: relative;
+    /* EVENTS ZONE: CAROUSEL WITH LIGHTBOX TRIGGER */
+    .drawer-events-zone {
       width: 100%;
-      margin-top: 13px;
+      margin-top: 22px; /* Turunkan 1 baris posisi tempat foto */
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* BADGE (BUKAN KAPSUL / NOT A PILL) SEJAJAR DI KIRI */
+    .drawer-section-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 4px; /* Persegi panjang dengan kurva sudut minimal 4px, tegas bukan kapsul */
+      background: rgba(12, 16, 22, 0.92);
+      border: 1px solid rgba(229, 179, 66, 0.35);
+      box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.60),
+        inset 1px 1px 1px rgba(255, 255, 255, 0.12);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.11em;
+      color: var(--c-accent-amber);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      align-self: flex-start;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* HORIZONTAL CAROUSEL TRACK */
+    .drawer-carousel-track {
+      width: 100%;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      border-radius: 12px;
+      touch-action: pan-x;
+    }
+
+    .drawer-carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .drawer-slide-card {
+      flex: 0 0 100%;
+      width: 100%;
+      aspect-ratio: 1280 / 820;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      position: relative;
       border-radius: 12px;
       overflow: hidden;
       background: #05070a;
@@ -655,26 +640,110 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         0 10px 28px -6px rgba(0, 0, 0, 0.85),
         0 0 16px rgba(229, 179, 66, 0.10),
         inset 1px 1px 1.5px rgba(255, 255, 255, 0.15);
-      flex-shrink: 0;
-      z-index: 2;
       cursor: zoom-in;
       touch-action: manipulation;
       transition:
-        transform 0.22s ease,
         border-color 0.22s ease,
         box-shadow 0.22s ease;
     }
 
-    .drawer-board-card:hover {
+    .drawer-slide-card:hover {
       border-color: rgba(229, 179, 66, 0.48);
       box-shadow:
         0 14px 34px -6px rgba(0, 0, 0, 0.90),
         0 0 22px rgba(229, 179, 66, 0.22);
-      transform: translateY(-1px);
     }
 
-    .drawer-board-card:active {
+    .drawer-slide-card:active {
       transform: scale(0.985);
+    }
+
+    /* SOON CARD: KOSONG DENGAN TULISAN MIRING DI TENGAH */
+    .drawer-card-empty-soon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(229, 179, 66, 0.05) 0%, transparent 70%),
+        rgba(8, 11, 16, 0.94);
+      border: 1px dashed rgba(229, 179, 66, 0.32);
+      cursor: default;
+    }
+
+    .drawer-soon-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .drawer-soon-text {
+      font-family: var(--font-mono);
+      font-size: 1.25rem;
+      font-weight: 800;
+      font-style: italic; /* Tulisan miring di tengah */
+      letter-spacing: 0.22em;
+      color: rgba(229, 179, 66, 0.72);
+      text-shadow:
+        0 0 16px rgba(229, 179, 66, 0.35),
+        0 2px 6px rgba(0, 0, 0, 0.85);
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* 3 DOTS SLIDE INDICATOR (TANPA EMBEL-EMBEL TEKS) */
+    .drawer-carousel-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      width: 100%;
+      margin-top: 10px;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .drawer-carousel-dot {
+      width: 7px;
+      height: 7px;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.20);
+      cursor: pointer;
+      transition:
+        width 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+        border-radius 0.22s ease,
+        background 0.22s ease,
+        box-shadow 0.22s ease;
+    }
+
+    .drawer-carousel-dot.active {
+      width: 18px;
+      border-radius: 4px;
+      background: var(--c-accent-amber);
+      box-shadow: 0 0 10px rgba(229, 179, 66, 0.55);
+    }
+
+    /* GARIS HORIZONTAL PEMBATAS */
+    .drawer-section-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(229, 179, 66, 0.32) 50%, transparent 100%);
+      margin: 16px 0 14px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* CONTACT ME ZONE */
+    .drawer-contact-zone {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
     }
 
     .drawer-board-img {
@@ -3427,11 +3496,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       <div class="drawer-forge-scrim"></div>
     </div>
 
-    <div class="drawer-aurora-canvas">
-      <div class="aurora-blob aurora-blob-gold"></div>
-      <div class="aurora-blob aurora-blob-velvet"></div>
-      <div class="aurora-blob aurora-blob-gray"></div>
-    </div>
+
 
     <div class="drawer-top-bar">
       <div class="drawer-crest-pill" id="drawer-crest-pill">
@@ -3452,67 +3517,136 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       </div>
     </div>
 
-    <!-- Tavern Quest & Commissions Board dengan Sentuhan Vignette Elegan & Lightbox Preview -->
-    <div
-      class="drawer-board-card"
-      id="drawer-board-card"
-      role="button"
-      tabindex="0"
-      aria-label="Lihat Preview Besar Papan Commissions Open"
-      onclick="openCommsLightbox()"
-    >
-      <picture>
-        <source srcset={`${baseUrl}/assets/comms_board.webp`} type="image/webp">
-        <img
-          src={`${baseUrl}/assets/comms_board.jpg`}
-          alt="Commissions Open - Tavern Quest Board"
-          class="drawer-board-img"
-          loading="lazy"
-          decoding="async"
-          width="1920"
-          height="1280"
-        />
-      </picture>
-      <div class="drawer-board-vignette" aria-hidden="true"></div>
-      <div class="drawer-board-zoom-hint" aria-hidden="true" title="Tap untuk perbesar">
-        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 3 21 3 21 9"></polyline>
-          <polyline points="9 21 3 21 3 15"></polyline>
-          <line x1="21" y1="3" x2="14" y2="10"></line>
-          <line x1="3" y1="21" x2="10" y2="14"></line>
-        </svg>
+    <!-- EVENTS SECTION: HORIZONTAL CAROUSEL WITH LIGHTBOX -->
+    <div class="drawer-events-zone">
+      <div class="drawer-section-badge" id="badge-events">EVENTS</div>
+
+      <!-- Horizontal Carousel Container -->
+      <div
+        class="drawer-carousel-track"
+        id="drawer-carousel-track"
+        tabindex="0"
+        aria-label="Events Carousel"
+      >
+        <!-- Slide 1: Void Guild Card -->
+        <div
+          class="drawer-slide-card"
+          role="button"
+          tabindex="0"
+          aria-label="Lihat Preview Kartu Void Guild"
+          onclick="openCommsLightbox('void_card')"
+        >
+          <picture>
+            <source srcset={`${baseUrl}/assets/void_guild_card.webp`} type="image/webp">
+            <img
+              src={`${baseUrl}/assets/void_guild_card.jpg`}
+              alt="VOID GUILD Adventurer Pass"
+              class="drawer-board-img"
+              loading="lazy"
+              decoding="async"
+              width="1280"
+              height="820"
+            />
+          </picture>
+          <div class="drawer-board-vignette" aria-hidden="true"></div>
+          <div class="drawer-board-zoom-hint" aria-hidden="true" title="Tap untuk perbesar">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <polyline points="9 21 3 21 3 15"></polyline>
+              <line x1="21" y1="3" x2="14" y2="10"></line>
+              <line x1="3" y1="21" x2="10" y2="14"></line>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Slide 2: Commissions Open Quest Board -->
+        <div
+          class="drawer-slide-card"
+          role="button"
+          tabindex="0"
+          aria-label="Lihat Preview Papan Commissions Open"
+          onclick="openCommsLightbox('comms')"
+        >
+          <picture>
+            <source srcset={`${baseUrl}/assets/comms_board.webp`} type="image/webp">
+            <img
+              src={`${baseUrl}/assets/comms_board.jpg`}
+              alt="Commissions Open - Tavern Quest Board"
+              class="drawer-board-img"
+              loading="lazy"
+              decoding="async"
+              width="1920"
+              height="1280"
+            />
+          </picture>
+          <div class="drawer-board-vignette" aria-hidden="true"></div>
+          <div class="drawer-board-zoom-hint" aria-hidden="true" title="Tap untuk perbesar">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 3 21 3 21 9"></polyline>
+              <polyline points="9 21 3 21 3 15"></polyline>
+              <line x1="21" y1="3" x2="14" y2="10"></line>
+              <line x1="3" y1="21" x2="10" y2="14"></line>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Slide 3: Blank Card SOON (tulisan miring di tengah) -->
+        <div
+          class="drawer-slide-card drawer-card-empty-soon"
+          role="article"
+          aria-label="Upcoming Event Soon"
+        >
+          <div class="drawer-soon-inner">
+            <span class="drawer-soon-text">SOON</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Dots Slide Indicator (Strictly dots only, no helper text) -->
+      <div class="drawer-carousel-dots" id="drawer-carousel-dots" aria-label="Slide Indicator">
+        <button type="button" class="drawer-carousel-dot active" data-slide="0" aria-label="Slide 1"></button>
+        <button type="button" class="drawer-carousel-dot" data-slide="1" aria-label="Slide 2"></button>
+        <button type="button" class="drawer-carousel-dot" data-slide="2" aria-label="Slide 3"></button>
       </div>
     </div>
 
-    <!-- Tautan Kontak IG, WA, Gmail Tepat di Bawah Foto (Horizontal) -->
-    <div class="drawer-comms-row">
-      <!-- 1. Instagram -->
-      <a href="https://www.instagram.com/moeza.q?evlk=MTU0MHpjNjd3azQ2eQ==" target="_blank" rel="noopener noreferrer" class="drawer-comm-btn" aria-label="Instagram Profile @moeza.q" title="Instagram @moeza.q">
-        <svg class="drawer-comm-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-        </svg>
-        <span>Instagram</span>
-      </a>
+    <!-- Garis Horizontal Pembatas di Bawahnya -->
+    <div class="drawer-section-divider" aria-hidden="true"></div>
 
-      <!-- 2. WhatsApp -->
-      <a href="https://wa.me/6282145581582" target="_blank" rel="noopener noreferrer" class="drawer-comm-btn" aria-label="WhatsApp Lets Talk" title="WhatsApp Lets Talk">
-        <svg class="drawer-comm-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/>
-          <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/>
-        </svg>
-        <span>WhatsApp</span>
-      </a>
+    <!-- CONTACT ME SECTION -->
+    <div class="drawer-contact-zone">
+      <div class="drawer-section-badge" id="badge-contact">CONTACT ME</div>
 
-      <!-- 3. Gmail -->
-      <a href="mailto:muzape@gmail.com" class="drawer-comm-btn" aria-label="Email muzape@gmail.com" title="Email muzape@gmail.com">
-        <svg class="drawer-comm-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-        </svg>
-        <span>Gmail</span>
-      </a>
+      <!-- Tautan Kontak IG, WA, Gmail Tepat di Bawah Badge CONTACT ME -->
+      <div class="drawer-comms-row">
+        <!-- 1. Instagram -->
+        <a href="https://www.instagram.com/moeza.q?evlk=MTU0MHpjNjd3azQ2eQ==" target="_blank" rel="noopener noreferrer" class="drawer-comm-btn" aria-label="Instagram Profile @moeza.q" title="Instagram @moeza.q">
+          <svg class="drawer-comm-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+          </svg>
+          <span>Instagram</span>
+        </a>
+
+        <!-- 2. WhatsApp -->
+        <a href="https://wa.me/6282145581582" target="_blank" rel="noopener noreferrer" class="drawer-comm-btn" aria-label="WhatsApp Lets Talk" title="WhatsApp Lets Talk">
+          <svg class="drawer-comm-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"/>
+            <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"/>
+          </svg>
+          <span>WhatsApp</span>
+        </a>
+
+        <!-- 3. Gmail -->
+        <a href="mailto:muzape@gmail.com" class="drawer-comm-btn" aria-label="Email muzape@gmail.com" title="Email muzape@gmail.com">
+          <svg class="drawer-comm-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+          </svg>
+          <span>Gmail</span>
+        </a>
+      </div>
     </div>
 
     <!-- Sisa Ruang Tengah Drawer: Kosong bersih untuk ide absurd -->
@@ -3527,13 +3661,13 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
   </aside>
 
-  <!-- LIGHTBOX MODAL: FULL PREVIEW COMMISSIONS OPEN QUEST BOARD -->
+  <!-- LIGHTBOX MODAL: FULL PREVIEW (EVENTS & COMMISSIONS) -->
   <div
     class="lightbox-overlay"
     id="lightbox-comms"
     role="dialog"
     aria-modal="true"
-    aria-label="Preview Papan Commissions Open"
+    aria-label="Preview Kartu"
     tabindex="-1"
     onclick="closeCommsLightbox()"
   >
@@ -3541,10 +3675,11 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     <div class="lightbox-dialog" onclick="closeCommsLightbox()">
       <div class="lightbox-image-wrap">
         <picture>
-          <source srcset={`${baseUrl}/assets/comms_board.webp`} type="image/webp">
+          <source id="lightbox-source-webp" srcset={`${baseUrl}/assets/void_guild_card.webp`} type="image/webp">
           <img
-            src={`${baseUrl}/assets/comms_board.jpg`}
-            alt="Commissions Open Master Preview"
+            id="lightbox-source-img"
+            src={`${baseUrl}/assets/void_guild_card.jpg`}
+            alt="Preview Kartu"
             class="lightbox-img"
             loading="lazy"
             decoding="async"
@@ -3552,7 +3687,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         </picture>
       </div>
       <div class="lightbox-caption">
-        <span>NEGOTIABLE BOUNTY</span>
+        <span id="lightbox-caption-text">VOID GUILD · ADVENTURER PASS</span>
       </div>
     </div>
   </div>
@@ -4172,9 +4307,29 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       });
     }
 
-    // LIGHTBOX PREVIEW HANDLERS
-    function openCommsLightbox() {
+    // LIGHTBOX PREVIEW HANDLERS (SUPPORTS VOID CARD & COMMISSIONS)
+    function openCommsLightbox(type = "void_card") {
       const lb = document.getElementById("lightbox-comms");
+      const imgWebp = document.getElementById("lightbox-source-webp");
+      const imgJpg = document.getElementById("lightbox-source-img");
+      const captionEl = document.getElementById("lightbox-caption-text");
+
+      if (type === "void_card") {
+        if (imgWebp) imgWebp.srcset = `${baseUrl}/assets/void_guild_card.webp`;
+        if (imgJpg) {
+          imgJpg.src = `${baseUrl}/assets/void_guild_card.jpg`;
+          imgJpg.alt = "VOID GUILD Adventurer Pass Preview";
+        }
+        if (captionEl) captionEl.textContent = "VOID GUILD · ADVENTURER PASS";
+      } else {
+        if (imgWebp) imgWebp.srcset = `${baseUrl}/assets/comms_board.webp`;
+        if (imgJpg) {
+          imgJpg.src = `${baseUrl}/assets/comms_board.jpg`;
+          imgJpg.alt = "Commissions Open Master Preview";
+        }
+        if (captionEl) captionEl.textContent = "NEGOTIABLE BOUNTY";
+      }
+
       if (lb) {
         lb.classList.add("active");
         if (navigator.vibrate) navigator.vibrate(10);
@@ -4191,6 +4346,43 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
     window.openCommsLightbox = openCommsLightbox;
     window.closeCommsLightbox = closeCommsLightbox;
+
+    // DRAWER CAROUSEL SLIDE & DOTS LOGIC
+    function setupDrawerCarousel() {
+      const track = document.getElementById("drawer-carousel-track");
+      const dots = document.querySelectorAll(".drawer-carousel-dot");
+      if (!track || dots.length === 0) return;
+
+      const slides = track.querySelectorAll(".drawer-slide-card");
+
+      track.addEventListener("scroll", () => {
+        const currentLeft = track.scrollLeft;
+        let closestIdx = 0;
+        let minDiff = Infinity;
+        slides.forEach((slide, idx) => {
+          const diff = Math.abs(slide.offsetLeft - track.offsetLeft - currentLeft);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIdx = idx;
+          }
+        });
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle("active", idx === closestIdx);
+        });
+      }, { passive: true });
+
+      dots.forEach((dot, idx) => {
+        dot.addEventListener("click", () => {
+          if (slides[idx]) {
+            track.scrollTo({
+              left: slides[idx].offsetLeft - track.offsetLeft,
+              behavior: "smooth"
+            });
+            if (navigator.vibrate) navigator.vibrate(6);
+          }
+        });
+      });
+    }
 
     // DRAWER PANEL TOGGLE (0ms pointerdown)
     function toggleDrawer(open) {
@@ -4209,7 +4401,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
     // TACTILE FEEDBACK PADA ELEMEN INTERAKTIF
     function setupTactileFeedback() {
-      const interactiveEls = document.querySelectorAll(".btn-topbar-panel, .story-link-item, .about-quick-card, .drawer-comm-btn, .drawer-board-card, .drawer-crest-pill");
+      const interactiveEls = document.querySelectorAll(".btn-topbar-panel, .story-link-item, .about-quick-card, .drawer-comm-btn, .drawer-slide-card, .drawer-crest-pill");
       interactiveEls.forEach(card => {
         const pressOn = () => card.classList.add("is-pressed");
         const pressOff = () => setTimeout(() => card.classList.remove("is-pressed"), 80);
@@ -4225,6 +4417,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       runPortfolioSpawn();
       setupQuickCardsAccordion();
       setupTactileFeedback();
+      setupDrawerCarousel();
 
       const btnPanel = document.getElementById("btn-topbar-panel");
       if (btnPanel) {
