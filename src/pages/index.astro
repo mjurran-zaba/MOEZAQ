@@ -2301,6 +2301,24 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       opacity: 0.70;
     }
 
+    /* KODE TAMBAHAN: Styling untuk link badge versi agar memiliki interaksi hover & klik yang mulus saat mengunduh APK */
+    .project-version-link {
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .project-version-link:hover .pipe-code {
+      background: rgba(245, 158, 11, 0.24);
+      border-color: rgba(245, 158, 11, 0.55);
+      color: #ffffff;
+    }
+
+    .project-version-link:active {
+      transform: scale(0.95);
+    }
+
     /* Kolom Kiri: 5 Card 1 Baris (Expand to Down saat di-tap) */
     .about-quick-cards {
       flex: 0 0 calc(50% - 6px);
@@ -3905,6 +3923,8 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
             </div>
             <div class="quick-card-body">
               <div class="quick-card-body-inner">
+                <!-- KODE ASLI (DIKOMENTARI): Menampilkan daftar project yang membuka tautan ke web repository GitHub saat di-klik -->
+                <!--
                 <div class="quick-pipe-item">
                   <span class="pipe-left">
                     <a href="https://github.com/mjurran-zaba/NOTEZ" target="_blank" rel="noopener noreferrer" class="project-link-underline" title="Buka Repository GitHub NOTEZ" onclick="event.stopPropagation()">NOTEZ</a>
@@ -3918,6 +3938,36 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
                   </span>
                   <span class="pipe-sep">|</span>
                   <span class="pipe-right"><code class="pipe-code">v1.0.23</code></span>
+                </div>
+                -->
+
+                <!-- PERUBAHAN LOGIKA: Mengubah tautan agar saat nama project atau tag versinya di-tap, browser langsung mengunduh file APK versi rilis terbaru (direct APK download), serta menambahkan project musik VoidTune (v0.0.1) -->
+                <div class="quick-pipe-item">
+                  <span class="pipe-left">
+                    <a href="https://github.com/mjurran-zaba/NOTEZ/releases/download/v0.2.0/NOTEZ-v0.2.0-release.apk" target="_blank" rel="noopener noreferrer" class="project-link-underline" title="Unduh Langsung NOTEZ APK v0.2.0" onclick="event.stopPropagation()">NOTEZ</a>
+                  </span>
+                  <span class="pipe-sep">|</span>
+                  <span class="pipe-right">
+                    <a href="https://github.com/mjurran-zaba/NOTEZ/releases/download/v0.2.0/NOTEZ-v0.2.0-release.apk" target="_blank" rel="noopener noreferrer" class="project-version-link" title="Unduh Langsung NOTEZ APK v0.2.0" onclick="event.stopPropagation()"><code class="pipe-code">v0.2.0</code></a>
+                  </span>
+                </div>
+                <div class="quick-pipe-item">
+                  <span class="pipe-left">
+                    <a href="https://github.com/muzape28-blip/ZCODE/releases/download/v1.0.23/ZCODE-v1.0.23.apk" target="_blank" rel="noopener noreferrer" class="project-link-underline" title="Unduh Langsung ZCODE APK v1.0.23" onclick="event.stopPropagation()">ZCODE</a>
+                  </span>
+                  <span class="pipe-sep">|</span>
+                  <span class="pipe-right">
+                    <a href="https://github.com/muzape28-blip/ZCODE/releases/download/v1.0.23/ZCODE-v1.0.23.apk" target="_blank" rel="noopener noreferrer" class="project-version-link" title="Unduh Langsung ZCODE APK v1.0.23" onclick="event.stopPropagation()"><code class="pipe-code">v1.0.23</code></a>
+                  </span>
+                </div>
+                <div class="quick-pipe-item">
+                  <span class="pipe-left">
+                    <a href="https://github.com/mjurran-zaba/ArchiveTune/releases/download/v0.0.1/VoidTune-v0.0.1-universal.apk" target="_blank" rel="noopener noreferrer" class="project-link-underline" title="Unduh Langsung VoidTune APK v0.0.1" onclick="event.stopPropagation()">VoidTune</a>
+                  </span>
+                  <span class="pipe-sep">|</span>
+                  <span class="pipe-right">
+                    <a href="https://github.com/mjurran-zaba/ArchiveTune/releases/download/v0.0.1/VoidTune-v0.0.1-universal.apk" target="_blank" rel="noopener noreferrer" class="project-version-link" title="Unduh Langsung VoidTune APK v0.0.1" onclick="event.stopPropagation()"><code class="pipe-code">v0.0.1</code></a>
+                  </span>
                 </div>
               </div>
             </div>
